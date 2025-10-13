@@ -1,11 +1,20 @@
-import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { Button, Checkbox, TextInput } from 'react-native-paper';
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  StatusBar,
+  Image,
+  StyleSheet
+} from 'react-native';
+// import { Checkbox } from 'react-native-paper';
 
-const RegisterScreen: React.FC = () => {
+const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -13,7 +22,6 @@ const RegisterScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const router = useRouter();
 
   const handleRegister = async () => {
     // Basic validation
@@ -44,7 +52,7 @@ const RegisterScreen: React.FC = () => {
       Alert.alert('Success', 'Account created successfully!', [
         {
           text: 'OK',
-          onPress: () => router.push('/(auth)/create-profile')
+          onPress: () => console.log('Navigate to create profile') // Replace with your navigation
         }
       ]);
 
@@ -81,13 +89,13 @@ const RegisterScreen: React.FC = () => {
                   id: '123456789'
                 };
                 console.log("Google sign-in success:", mockGoogleUser);
-                router.replace('/(auth)/create-profile');
+                console.log('Navigate to create profile'); // Replace with your navigation
               }, 1500);
             }
           }
         ]
       );
-    } catch (error: any) {
+    } catch (error) {
       console.log("Google sign in error:", error);
       Alert.alert('Google Sign-In Failed', 'Please try again.');
     }
@@ -113,13 +121,13 @@ const RegisterScreen: React.FC = () => {
               setLoading(true);
               setTimeout(() => {
                 setLoading(false);
-                router.replace('/(auth)/create-profile');
+                console.log('Navigate to create profile'); // Replace with your navigation
               }, 1500);
             }
           }
         ]
       );
-    } catch (error: any) {
+    } catch (error) {
       console.log("Apple sign in error:", error);
       Alert.alert('Apple Sign-In Failed', 'Please try again.');
     }
@@ -134,152 +142,116 @@ const RegisterScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <StatusBar style="dark" />
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        className="flex-1"
+        style={styles.keyboardAvoidingView}
       >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View className="flex-1">
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          <View style={styles.container}>
             {/* Auth Background Image */}
-            <View className="relative h-72">
-              <Image
-                source={require('../../assets/images/auth/bg.png')}
-                className="w-full h-full"
-                contentFit="cover"
-                style={{ width: '100%', height: '100%' }}
-              />
-              <View className="absolute inset-0 bg-black/20" />
-              <View className="absolute bottom-8 left-6 right-6">
-                <Text className="text-3xl font-bold text-white mb-2">Create Account</Text>
-                <Text className="text-base text-white/80">Sign up to get started</Text>
+            <View style={styles.imageContainer}>
+              {/* <Image
+                source={require('../assets/images/auth/bg.png')} // Update path as needed
+                style={styles.backgroundImage}
+              /> */}
+              <View style={styles.overlay} />
+              <View style={styles.textContainer}>
+                <Text style={styles.title}>Create Account</Text>
+                <Text style={styles.subtitle}>Sign up to get started</Text>
               </View>
             </View>
             
             {/* Form Section */}
-            <View className="px-6 py-8 bg-white rounded-t-3xl -mt-6 relative z-10 flex-1">
-              <Text className="text-base font-medium text-gray-700 mb-2">Email Address</Text>
+            <View style={styles.formContainer}>
+              <Text style={styles.label}>Email Address</Text>
               <TextInput
-                mode="outlined"
+                style={styles.textInput}
                 placeholder="Enter your email"
                 value={email}
                 onChangeText={setEmail}
-                style={{ marginBottom: 16, backgroundColor: '#FFFFFF', height: 56 }}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                outlineColor="#E5E5E5"
-                activeOutlineColor="#6366F1"
               />
 
-              <Text className="text-base font-medium text-gray-700 mb-2">Password</Text>
+              <Text style={styles.label}>Password</Text>
               <TextInput
-                mode="outlined"
+                style={styles.textInput}
                 placeholder="Enter your password"
                 value={password}
                 onChangeText={setPassword}
-                style={{ marginBottom: 16, backgroundColor: '#FFFFFF', height: 56 }}
                 secureTextEntry={!showPassword}
-                outlineColor="#E5E5E5"
-                activeOutlineColor="#6366F1"
-                right={
-                  <TextInput.Icon
-                    icon={showPassword ? "eye-off" : "eye"}
-                    onPress={toggleShowPassword}
-                    color="#9CA4AB"
-                  />
-                }
               />
 
-              <Text className="text-base font-medium text-gray-700 mb-2">Confirm Password</Text>
+              <Text style={styles.label}>Confirm Password</Text>
               <TextInput
-                mode="outlined"
+                style={styles.textInput}
                 placeholder="Confirm your password"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
-                style={{ marginBottom: 16, backgroundColor: '#FFFFFF', height: 56 }}
                 secureTextEntry={!showConfirmPassword}
-                outlineColor="#E5E5E5"
-                activeOutlineColor="#6366F1"
-                right={
-                  <TextInput.Icon
-                    icon={showConfirmPassword ? "eye-off" : "eye"}
-                    onPress={toggleShowConfirmPassword}
-                    color="#9CA4AB"
-                  />
-                }
               />
 
-              <View className="flex-row items-center mb-6">
-                <Checkbox
+              <View style={styles.checkboxContainer}>
+                {/* <Checkbox
                   status={termsAccepted ? 'checked' : 'unchecked'}
                   onPress={() => setTermsAccepted(!termsAccepted)}
                   color="#6366F1"
-                />
-                <Text className="flex-1 ml-2 text-gray-600 text-sm">
+                /> */}
+                <Text style={styles.checkboxText}>
                   I agree to the{' '}
-                  <Text className="text-gray-900 font-semibold">Terms & Conditions</Text> and{' '}
-                  <Text className="text-gray-900 font-semibold">Privacy Policy</Text>
+                  <Text style={styles.boldText}>Terms & Conditions</Text> and{' '}
+                  <Text style={styles.boldText}>Privacy Policy</Text>
                 </Text>
               </View>
 
-              <Button
-                mode="contained"
+              <TouchableOpacity
+                style={[styles.button, loading && styles.buttonDisabled]}
                 onPress={handleRegister}
-                style={{
-                  marginTop: 8,
-                  backgroundColor: '#1E40AF',
-                  borderRadius: 12,
-                  height: 56
-                }}
-                contentStyle={{ height: 56 }}
-                loading={loading}
                 disabled={loading}
-                labelStyle={{ fontSize: 16, fontWeight: '600', color: '#FFFFFF' }}
               >
-                Create Account
-              </Button>
+                <Text style={styles.buttonText}>
+                  {loading ? 'Creating Account...' : 'Create Account'}
+                </Text>
+              </TouchableOpacity>
               
               {/* Divider */}
-              <View className="flex-row items-center my-6">
-                <View className="flex-1 h-px bg-gray-200" />
-                <Text className="mx-4 text-gray-500 text-sm">or continue with</Text>
-                <View className="flex-1 h-px bg-gray-200" />
+              <View style={styles.dividerContainer}>
+                <View style={styles.divider} />
+                <Text style={styles.dividerText}>or continue with</Text>
+                <View style={styles.divider} />
               </View>
 
               {/* Social Login Buttons */}
-              <View className="flex-row justify-between mb-6 space-x-3">
+              <View style={styles.socialButtonsContainer}>
                 <TouchableOpacity
-                  className="flex-1 flex-row items-center justify-center h-14 rounded-xl bg-white border border-gray-200 mx-1"
+                  style={styles.socialButton}
                   onPress={handleGoogleSignIn}
-                  style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 1 }}
                 >
-                  <Image
-                    source={require('../../assets/images/google.png')}
-                    style={{ width: 24, height: 24, marginRight: 12 }}
-                    contentFit="contain"
-                  />
-                  <Text className="text-gray-700 font-medium text-base">Google</Text>
+                  {/* <Image
+                    source={require('../assets/images/google.png')} // Update path as needed
+                    style={styles.socialIcon}
+                  /> */}
+                  <Text style={styles.socialButtonText}>Google</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  className="flex-1 flex-row items-center justify-center h-14 rounded-xl bg-white border border-gray-200 mx-1"
+                  style={styles.socialButton}
                   onPress={handleAppleSignIn}
-                  style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 1 }}
                 >
-                  <Image
-                    source={require('../../assets/images/apple.png')}
-                    style={{ width: 24, height: 24, marginRight: 12 }}
-                    contentFit="contain"
-                  />
-                  <Text className="text-gray-700 font-medium text-base">Apple</Text>
+                  {/* <Image
+                    source={require('../../assets/images/auth/apple.png')} // Update path as needed
+                    style={styles.socialIcon}
+                  /> */}
+                  <Text style={styles.socialButtonText}>Apple</Text>
                 </TouchableOpacity>
               </View>
 
               {/* Footer */}
-              <View className="flex-row justify-center mt-auto mb-6">
-                <Text className="text-gray-600 text-base">Already have an account? </Text>
-                <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
-                  <Text className="text-[#1E40AF] font-semibold text-base">Sign In</Text>
+              <View style={styles.footer}>
+                <Text style={styles.footerText}>Already have an account? </Text>
+                <TouchableOpacity onPress={() => console.log('Navigate to login')}>
+                  <Text style={styles.footerLink}>Sign In</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -289,5 +261,185 @@ const RegisterScreen: React.FC = () => {
     </SafeAreaView>
   );
 };
+
+// Custom TextInput component since we removed react-native-paper
+const TextInput = ({ style, secureTextEntry, ...props }) => {
+  return (
+    <TextInput
+      style={[styles.textInputBase, style]}
+      secureTextEntry={secureTextEntry}
+      {...props}
+    />
+  );
+};
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
+  container: {
+    flex: 1,
+  },
+  imageContainer: {
+    position: 'relative',
+    height: 280,
+  },
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+  },
+  textContainer: {
+    position: 'absolute',
+    bottom: 32,
+    left: 24,
+    right: 24,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.8)',
+  },
+  formContainer: {
+    paddingHorizontal: 24,
+    paddingVertical: 32,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    marginTop: -24,
+    position: 'relative',
+    zIndex: 10,
+    flex: 1,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#374151',
+    marginBottom: 8,
+  },
+  textInputBase: {
+    borderWidth: 1,
+    borderColor: '#E5E5E5',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    fontSize: 16,
+    backgroundColor: '#FFFFFF',
+    marginBottom: 16,
+    height: 56,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  checkboxText: {
+    flex: 1,
+    marginLeft: 8,
+    fontSize: 14,
+    color: '#6B7280',
+  },
+  boldText: {
+    fontWeight: '600',
+    color: '#111827',
+  },
+  button: {
+    backgroundColor: '#1E40AF',
+    borderRadius: 12,
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 24,
+  },
+  divider: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#E5E7EB',
+  },
+  dividerText: {
+    marginHorizontal: 16,
+    fontSize: 14,
+    color: '#6B7280',
+  },
+  socialButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 24,
+    gap: 12,
+  },
+  socialButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 56,
+    borderRadius: 12,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  socialIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 12,
+  },
+  socialButtonText: {
+    color: '#374151',
+    fontWeight: '500',
+    fontSize: 16,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 'auto',
+    marginBottom: 24,
+  },
+  footerText: {
+    fontSize: 16,
+    color: '#6B7280',
+  },
+  footerLink: {
+    fontSize: 16,
+    color: '#1E40AF',
+    fontWeight: '600',
+  },
+});
 
 export default RegisterScreen;
