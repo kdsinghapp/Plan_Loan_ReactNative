@@ -1,213 +1,219 @@
-import { useRouter } from 'expo-router';
 import React from 'react';
-import { Alert, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-
-const Navbar = require('../../../components/Navbar').default;
-
+import {
+  Alert,
+  Image,
+   ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+ 
 export default function ProfileScreen() {
-	const router = useRouter();
+  const navigation = useNavigation();
 
-	const handleLogout = () => {
-		Alert.alert(
-			'Logout',
-			'Are you sure you want to logout?',
-			[
-				{
-					text: 'Cancel',
-					style: 'cancel'
-				},
-				{
-					text: 'Logout',
-					style: 'destructive',
-					onPress: () => {
-						router.replace('/(auth)/login');
-					}
-				}
-			]
-		);
-	};
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => navigation.replace('Login'),
+        },
+      ]
+    );
+  };
 
-	return (
-		<SafeAreaView className="flex-1 bg-white">
-			<ScrollView className="flex-1 bg-white">
-				{/* Header - Removed mobile status bar elements */}
-				<View className="flex-row items-center justify-between mb-5 mx-6 mt-4 py-8">
-					<TouchableOpacity
-						onPress={() => router.back()}>
-						<Image
-							source={require('../../../assets/images/icons/back.png')}
-							resizeMode="contain"
-							className="w-10 h-10"
-						/>
-					</TouchableOpacity>
-					<Text className="text-slate-700 text-2xl font-bold">
-						Profile
-					</Text>
-					<View className="flex-row">
-						<TouchableOpacity
-							className="border border-yellow-500 rounded-xl p-2 mr-4"
-							onPress={() => alert('Settings pressed!')}>
-							<Image
-								source={require('../../../assets/images/icons/call.png')}
-								resizeMode="contain"
-								className="w-6 h-6"
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-													className="border border-yellow-500 rounded-xl p-2"
-													onPress={() => router.push('/(tabs)/notifications')}>
-													<Image
-														source={require('../../../assets/images/icons/notification.png')}
-														resizeMode="contain"
-														className="w-6 h-6"
-													/>
-												</TouchableOpacity>
-					</View>
-				</View>
-				{/* Profile Content */}
-				<View className="mx-2">
-					<View className="items-center mx-5">
-						{/* Profile Avatar and Name */}
-						<View className="items-center mb-6">
-							<Image
-								source={require('../../../assets/images/profile/avatar.png')}
-								resizeMode="cover"
-								className="w-20 h-20 rounded-full mb-3"
-							/>
-							<View className="items-center pb-1">
-								<Text className="text-slate-700 text-2xl font-bold">
-									John Smith
-								</Text>
-							</View>
-						</View>
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <ScrollView 
+	  
+	 showsVerticalScrollIndicator={false}
+	 style={{ flex: 1, backgroundColor: '#fff' }}>
+        {/* Header */}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginHorizontal: 16,
+            marginTop: 16,
+            marginBottom: 20,
+          }}
+        >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require('../../../assets/images/icons/back.png')}
+               style={{ width: 40, height: 40 }}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
 
-						{/* Social Media Cards */}
-						<View className="self-stretch mb-6">
-							{/* Facebook Card */}
-							<View className="flex-row items-center bg-purple-50 border border-purple-200 rounded-xl p-4 mb-4">
-								<View className="w-10 h-10 bg-blue-100 rounded-lg items-center justify-center mr-3">
-									<Text className="text-blue-600 text-lg font-bold">A</Text>
-								</View>
-								<View className="flex-1">
-									<Text className="text-gray-800 text-base font-bold">Facebook</Text>
-									<Text className="text-gray-500 text-sm">Subhead</Text>
-								</View>
-								<View className="flex-row">
-									<View className="w-4 h-4 bg-gray-400 rounded-full mr-1"></View>
-									<View className="w-4 h-4 bg-gray-400 rounded-full"></View>
-								</View>
-							</View>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#334155' }}>
+            Profile
+          </Text>
 
-							{/* Instagram Card */}
-							<View className="flex-row items-center bg-purple-50 border border-purple-200 rounded-xl p-4 mb-4">
-								<View className="w-10 h-10 bg-blue-100 rounded-lg items-center justify-center mr-3">
-									<Text className="text-blue-600 text-lg font-bold">A</Text>
-								</View>
-								<View className="flex-1">
-									<Text className="text-gray-800 text-base font-bold">Instagram</Text>
-									<Text className="text-gray-500 text-sm">Subhead</Text>
-								</View>
-								<View className="flex-row">
-									<View className="w-4 h-4 bg-gray-400 rounded-full mr-1"></View>
-									<View className="w-4 h-4 bg-gray-400 rounded-full"></View>
-								</View>
-							</View>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity
+              onPress={() => alert('Settings pressed!')}
+              style={{
+                borderWidth: 1,
+                borderColor: '#F59E0B',
+                borderRadius: 12,
+                padding: 8,
+                marginRight: 8,
+              }}
+            >
+              <Image
+                source={require('../../../assets/images/icons/call.png')}
+                style={{ width: 24, height: 24 }}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
 
-							{/* Chinese Social Media Card */}
-							<View className="flex-row items-center bg-purple-50 border border-purple-200 rounded-xl p-4">
-								<View className="w-10 h-10 bg-blue-100 rounded-lg items-center justify-center mr-3">
-									<Text className="text-blue-600 text-lg font-bold">A</Text>
-								</View>
-								<View className="flex-1">
-									<Text className="text-gray-800 text-base font-bold">上傳更多文案</Text>
-									<Text className="text-gray-500 text-sm">Subhead</Text>
-								</View>
-								<View className="flex-row">
-									<View className="w-4 h-4 bg-gray-400 rounded-full mr-1"></View>
-									<View className="w-4 h-4 bg-gray-400 rounded-full"></View>
-								</View>
-							</View>
-						</View>
-						{/* Profile Information Card */}
-						<View className="self-stretch bg-white border border-gray-400 rounded-lg pt-4 pb-1">
-							<View className="flex-row justify-between items-center mb-3 mx-4">
-								<Text className="text-slate-700 text-sm font-bold mr-1 flex-1">
-									Gender
-								</Text>
-								<Text className="text-gray-400 text-sm font-bold text-right flex-1">
-									Male
-								</Text>
-							</View>
-							<View className="h-px bg-gray-200 mb-3 mx-4">
-							</View>
-							<View className="flex-row justify-between mb-3 mx-4">
-								<Text className="text-slate-700 text-sm font-bold mr-1 flex-1">
-									DOB
-								</Text>
-								<Text className="text-gray-400 text-sm font-bold text-right flex-1">
-									19-12-1990
-								</Text>
-							</View>
-							<View className="h-px bg-gray-200 mb-3 mx-4">
-							</View>
-							<View className="flex-row justify-between items-center mb-3 mx-4">
-								<Text className="text-slate-700 text-sm font-bold mr-1 flex-1">
-									Age
-								</Text>
-								<Text className="text-gray-400 text-sm font-bold text-right flex-1">
-									18 years old
-								</Text>
-							</View>
-							<View className="h-px bg-gray-200 mb-3 mx-4">
-							</View>
-							<View className="flex-row justify-between items-center mb-3 mx-4">
-								<Text className="text-slate-700 text-sm font-bold mr-1 flex-1">
-									Phone Number
-								</Text>
-								<Text className="text-gray-400 text-sm font-bold text-right flex-1">
-									+123 4567890
-								</Text>
-							</View>
-							<View className="h-px bg-gray-200 mb-3 mx-4">
-							</View>
-							<View className="flex-row justify-between items-center mb-3 mx-4">
-								<Text className="text-slate-700 text-sm font-bold mr-1 flex-1">
-									Address
-								</Text>
-								<Text className="text-gray-400 text-sm font-bold text-right flex-1">
-									Lorem Ipsum Dolor Dorsi
-								</Text>
-							</View>
-							<View className="h-px bg-gray-200 mb-1 mx-4">
-							</View>
-							<View className="mb-3">
-								<View className="flex-row justify-between items-center mb-3 mx-4">
-									<Text className="text-slate-700 text-sm font-bold mr-1 flex-1">
-										State
-									</Text>
-									<Text className="text-gray-400 text-sm font-bold text-right flex-1">
-										New York
-									</Text>
-								</View>
-							</View>
-							<View className="h-px bg-gray-200 mx-4">
-							</View>
-						</View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Notifications')}
+              style={{
+                borderWidth: 1,
+                borderColor: '#F59E0B',
+                borderRadius: 12,
+                padding: 8,
+              }}
+            >
+              <Image
+                source={require('../../../assets/images/icons/notification.png')}
+                style={{ width: 24, height: 24 }}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
 
-						{/* Edit Profile Button */}
-						<TouchableOpacity
-							className="items-center bg-slate-700 rounded-lg py-3 mb-3 self-stretch"
-							onPress={() => router.push('/(tabs)/profile/edit')}>
-							<Text className="text-white text-xl font-bold">
-								Edit Profile
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-			</ScrollView>
+        {/* Profile Content */}
+        <View style={{ marginHorizontal: 8 }}>
+          <View style={{ alignItems: 'center', marginBottom: 20 }}>
+            <Image
+              source={require('../../../assets/images/profile/avatar.png')}
+               style={{ width: 80, height: 80, borderRadius: 40, marginBottom: 12 }}
+            />
+            <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#334155' }}>
+              John Smith
+            </Text>
+          </View>
 
-			{/* Bottom Navigation */}
-			<Navbar onLogout={handleLogout} />
-		</SafeAreaView>
-	);
+          {/* Social Media Cards */}
+          <View style={{ width: '100%', marginBottom: 20 }}>
+            {['Facebook', 'Instagram', '上傳更多文案'].map((item, index) => (
+              <View
+                key={index}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  backgroundColor: '#F5F3FF',
+                  borderWidth: 1,
+                  borderColor: '#DDD6FE',
+                  borderRadius: 12,
+                  padding: 16,
+                  marginBottom: 12,
+                }}
+              >
+                <View
+                  style={{
+                    width: 40,
+                    height: 40,
+                    backgroundColor: '#DBEAFE',
+                    borderRadius: 8,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginRight: 12,
+                  }}
+                >
+                  <Text style={{ color: '#3B82F6', fontWeight: 'bold' }}>A</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontWeight: 'bold', color: '#1F2937' }}>{item}</Text>
+                  <Text style={{ color: '#6B7280', fontSize: 12 }}>Subhead</Text>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                  <View
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: 6,
+                      backgroundColor: '#9CA3AF',
+                      marginRight: 4,
+                    }}
+                  />
+                  <View
+                    style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: '#9CA3AF' }}
+                  />
+                </View>
+              </View>
+            ))}
+          </View>
+
+          {/* Profile Information Card */}
+          <View
+            style={{
+              backgroundColor: '#fff',
+              borderWidth: 1,
+              borderColor: '#CBD5E1',
+              borderRadius: 12,
+              paddingVertical: 12,
+              marginBottom: 20,
+            }}
+          >
+            {[
+              { label: 'Gender', value: 'Male' },
+              { label: 'DOB', value: '19-12-1990' },
+              { label: 'Age', value: '18 years old' },
+              { label: 'Phone Number', value: '+123 4567890' },
+              { label: 'Address', value: 'Lorem Ipsum Dolor Dorsi' },
+              { label: 'State', value: 'New York' },
+            ].map((item, index) => (
+              <View key={index}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginHorizontal: 16,
+                    marginVertical: 8,
+                  }}
+                >
+                  <Text style={{ fontWeight: 'bold', color: '#334155' }}>{item.label}</Text>
+                  <Text style={{ fontWeight: 'bold', color: '#9CA3AF' }}>{item.value}</Text>
+                </View>
+                {index !== 5 && (
+                  <View style={{ height: 1, backgroundColor: '#E5E7EB', marginHorizontal: 16 }} />
+                )}
+              </View>
+            ))}
+          </View>
+
+          {/* Edit Profile Button */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('EditProfile')}
+            style={{
+              backgroundColor: '#1E3A8A',
+              borderRadius: 12,
+              paddingVertical: 12,
+              alignItems: 'center',
+              marginHorizontal: 16,
+            }}
+          >
+            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+              Edit Profile
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+
+      {/* Bottom Navbar */}
+      {/* <Navbar onLogout={handleLogout} /> */}
+    </SafeAreaView>
+  );
 }

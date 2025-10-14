@@ -15,7 +15,7 @@ LogBox.ignoreAllLogs();
 (TextInput as any).defaultProps = (TextInput as any).defaultProps || {};
 
 (TextInput as any).defaultProps.allowFontScaling = false;
-
+    
 (TextInput as any).defaultProps.underlineColorAndroid = "transparent";
 
  

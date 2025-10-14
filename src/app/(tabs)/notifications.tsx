@@ -1,297 +1,70 @@
-import { useRouter } from 'expo-router';
 import React from "react";
-import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View, } from "react-native";
+import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function NotificationsScreen() {
-	const router = useRouter();
+  const navigation = useNavigation();
 
-	const handleBackPress = () => {
-		router.back();
-	};
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
 
-	return (
-		<SafeAreaView className="flex-1 bg-white">
-			<ScrollView className="flex-1 bg-white">
-				<View className="flex-row items-center pr-1 mb-6 ml-6 mt-4 py-6">
-					<TouchableOpacity onPress={handleBackPress}>
-						<Image
-							source={require('../../assets/images/icons/back.png')}
-							resizeMode="contain"
-							style={{
-								width: 37,
-								height: 36,
-								marginRight: 78,
-							}}
-						/>
-					</TouchableOpacity>
-					<Text
-						style={{
-							color: "#374061",
-							fontSize: 24,
-							fontWeight: "bold",
-						}}>
-						{"Notifications"}
-					</Text>
-				</View>
-				<View className="mb-12 mx-6">
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4 mb-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4 mb-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4 mb-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4 mb-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4 mb-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4 mb-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4 mb-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-					<View
-						className="flex-row items-center rounded-xl border py-3 px-4"
-						style={{
-							backgroundColor: "#F4F7FA",
-							borderColor: "#B1C5DF",
-						}}>
-						<Image
-							source={require('../../assets/images/notifications/notification.png')}
-							resizeMode="contain"
-							style={{
-								width: 49,
-								height: 49,
-								marginRight: 10,
-							}}
-						/>
-						<View className="flex-1">
-							<Text
-								className="text-lg font-bold mb-1"
-								style={{
-									color: "#262626",
-								}}>
-								{"Lorem Ipsum"}
-							</Text>
-							<Text
-								className="text-sm"
-								style={{
-									color: "#6F6F6F",
-								}}>
-								{"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"}
-							</Text>
-						</View>
-					</View>
-				</View>
-			</ScrollView>
-		</SafeAreaView>
-	)
+  // Example notification data
+  const notifications = Array(9).fill({
+    title: "Lorem Ipsum",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+    icon: require('../../assets/images/notifications/notification.png'),
+  });
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 24, paddingHorizontal: 24, marginBottom: 24 }}>
+          <TouchableOpacity onPress={handleBackPress}>
+            <Image
+              source={require('../../assets/images/icons/back.png')}
+              resizeMode="contain"
+              style={{ width: 37, height: 36, marginRight: 16 }}
+            />
+          </TouchableOpacity>
+          <Text style={{ color: "#374061", fontSize: 24, fontWeight: "bold" }}>
+            Notifications
+          </Text>
+        </View>
+
+        <View style={{ marginHorizontal: 24, marginBottom: 48 }}>
+          {notifications.map((item, index) => (
+            <View
+              key={index}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                borderRadius: 16,
+                borderWidth: 1,
+                borderColor: "#B1C5DF",
+                backgroundColor: "#F4F7FA",
+                paddingVertical: 12,
+                paddingHorizontal: 16,
+                marginBottom: 16,
+              }}
+            >
+              <Image
+                source={item.icon}
+                resizeMode="contain"
+                style={{ width: 49, height: 49, marginRight: 10 }}
+              />
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#262626', marginBottom: 4 }}>
+                  {item.title}
+                </Text>
+                <Text style={{ fontSize: 14, color: '#6F6F6F' }}>
+                  {item.message}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }

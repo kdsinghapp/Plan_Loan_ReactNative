@@ -1,186 +1,270 @@
-import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { 
+  Alert, 
+  SafeAreaView, 
+  ScrollView, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  View, 
+  Linking, 
+  StyleSheet, 
+  Image
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const Navbar = require('../../../components/Navbar').default;
-const HamburgerMenu = require('../../../components/HamburgerMenu').default;
+// Import your custom components
+import Navbar from '../../../components/Navbar';
+import HamburgerMenu from '../../../components/HamburgerMenu';
 
 export default function HelpScreen() {
-	const router = useRouter();
-	const [subject, setSubject] = useState('');
-	const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-	const [message, setMessage] = useState('');
+  const navigation = useNavigation();
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
-	const handleLogout = () => {
-		Alert.alert(
-			'Logout',
-			'Are you sure you want to logout?',
-			[
-				{
-					text: 'Cancel',
-					style: 'cancel'
-				},
-				{
-					text: 'Logout',
-					style: 'destructive',
-					onPress: () => {
-						router.replace('/(auth)/login');
-					}
-				}
-			]
-		);
-	};
-	return (
-		<SafeAreaView className="flex-1 bg-white">
-			<ScrollView className="flex-1 bg-white">
-				{/* Header with buttons */}
-				<View className="flex-row items-center justify-between mb-6 mx-6 mt-4 py-8">
-					{/* Left side - Hamburger menu */}
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Logout', style: 'destructive', onPress: () => navigation.replace('Login') }
+      ]
+    );
+  };
+
+  const openURL = async (url) => {
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        Alert.alert("Error", `Cannot open this URL: ${url}`);
+      }
+    } catch (error) {
+      Alert.alert("Error", "Something went wrong!");
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView  
+        showsVerticalScrollIndicator={false} 
+        style={styles.scrollView}
+      >
+        {/* Header */}
+        	<View style={{
+				  flexDirection: 'row',
+				  alignItems: 'center',
+				  justifyContent: 'space-between',
+				  marginHorizontal: 16,
+				  marginTop: 16,
+				  marginBottom: 24,
+				  paddingVertical: 8
+				}}>
+				  {/* Left side - Hamburger menu */}
+				  <TouchableOpacity
+					style={{
+					  borderWidth: 1,
+					  borderColor: '#FACC15',
+					  borderRadius: 12,
+					  padding: 8
+					}}
+					onPress={() => setShowHamburgerMenu(true)}
+				  >
+					<Image
+					  source={require('../../../assets/images/icons/menu.png')}
+					  resizeMode="contain"
+					  style={{ width: 24, height: 24 }}
+					/>
+				  </TouchableOpacity>
+		
+				  {/* Center - Title */}
+				  <Text style={{ color: '#374061', fontSize: 24, fontWeight: 'bold' }}>
+					Help
+				  </Text>
+		
+				  {/* Right side - Action buttons */}
+				  <View style={{ flexDirection: 'row' }}>
 					<TouchableOpacity
-						onPress={() => setShowHamburgerMenu(true)}>
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/o00x8t1i_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-10 h-10"
-						/>
+					  style={{
+						borderWidth: 1,
+						borderColor: '#FACC15',
+						borderRadius: 12,
+						padding: 8,
+						marginRight: 16
+					  }}
+					  onPress={() => alert('Pressed!')}
+					>
+					  <Image
+						source={require('../../../assets/images/icons/call.png')}
+						resizeMode="contain"
+						style={{ width: 24, height: 24 }}
+					  />
 					</TouchableOpacity>
-
-					{/* Center - Title */}
-					<Text className="text-slate-700 text-2xl font-bold">
-						Need Help
-					</Text>
-
-					{/* Right side - Action buttons */}
-					<View className="flex-row">
-						<TouchableOpacity
-							className="border border-yellow-500 rounded-xl p-2 mr-4"
-							onPress={() => alert('Call support pressed!')}>
-							<Image
-								source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/8lr8pdvl_expires_30_days.png"}}
-								resizeMode="stretch"
-								className="w-6 h-6"
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => router.push('/(tabs)/notifications')}>
-							<Image
-								source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/ziil0odt_expires_30_days.png"}}
-								resizeMode="stretch"
-								className="w-10 h-10"
-							/>
-						</TouchableOpacity>
-					</View>
+					<TouchableOpacity
+					  style={{
+						borderWidth: 1,
+						borderColor: '#FACC15',
+						borderRadius: 12,
+						padding: 8
+					  }}
+					  onPress={() => navigation.navigate('Notifications')}
+					>
+					  <Image
+						source={require('../../../assets/images/icons/notification.png')}
+						resizeMode="contain"
+						style={{ width: 24, height: 24 }}
+					  />
+					</TouchableOpacity>
+				  </View>
 				</View>
-				{/* Help Options */}
-				<View className="mb-6 mx-6">
-					<TouchableOpacity
-						className="flex-row items-center bg-white border border-gray-300 rounded-lg p-4 mb-4 shadow-lg"
-						onPress={() => router.push('/(tabs)/help/feedback')}>
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/autfh8rx_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-6 h-6 mr-3"
-						/>
-						<Text className="text-slate-700 text-sm font-bold flex-1">
-							Help Center
-						</Text>
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/qlwaq00b_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-6 h-6"
-						/>
-					</TouchableOpacity>
 
-					<TouchableOpacity
-						className="flex-row items-center bg-white border border-gray-300 rounded-lg p-4 mb-4 shadow-lg"
-						onPress={() => router.push('/(tabs)/help/faq')}>
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/5urmzo93_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-6 h-6 mr-3"
-						/>
-						<Text className="text-slate-700 text-sm font-bold flex-1">
-							FAQ
-						</Text>
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/y5npt4d5_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-6 h-6"
-						/>
-					</TouchableOpacity>
+        {/* Help Options */}
+        <View style={styles.optionsContainer}>
+          <TouchableOpacity style={styles.optionButton} onPress={() => openURL('https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/qlwaq00b_expires_30_days.png')}>
+            <Text style={styles.optionText}>Help Center</Text>
+          </TouchableOpacity>
 
-					<TouchableOpacity
-						className="flex-row items-center bg-white border border-gray-300 rounded-lg p-4 shadow-lg"
-						onPress={() => router.push('/(tabs)/help/chat')}>
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/yothwoxs_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-6 h-6 mr-3"
-						/>
-						<Text className="text-slate-700 text-sm font-bold flex-1">
-							Contact Support
-						</Text>
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/jahr92jf_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-6 h-6"
-						/>
-					</TouchableOpacity>
-				</View>
-				{/* Request Support Section */}
-				<View className="mb-32 mx-6">
-					<Text className="text-gray-800 text-2xl font-bold mb-4">
-						Request Support
-					</Text>
-					<View>
-						<View className="mb-6">
-							<View className="mb-4">
-								<Text className="text-gray-800 text-base font-bold mb-3">
-									Subject
-								</Text>
-								<TextInput
-									placeholder="Enter subject"
-									value={subject}
-									onChangeText={setSubject}
-									className="bg-white border border-slate-700 rounded-lg px-4 py-4 text-base text-gray-800"
-									placeholderTextColor="#9CA3AF"
-								/>
-							</View>
-							<View>
-								<Text className="text-gray-800 text-base font-bold mb-3">
-									Message
-								</Text>
-								<TextInput
-									placeholder="Enter message"
-									value={message}
-									onChangeText={setMessage}
-									multiline
-									numberOfLines={4}
-									className="bg-white border border-gray-400 rounded-lg px-4 py-4 text-base text-gray-800 h-24"
-									placeholderTextColor="#9CA3AF"
-									textAlignVertical="top"
-								/>
-							</View>
-						</View>
-						<TouchableOpacity
-							className="items-center bg-slate-700 rounded-lg py-3"
-							onPress={() => alert('Support request submitted!')}>
-							<Text className="text-white text-xl font-bold">
-								Continue
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-			</ScrollView>
+          <TouchableOpacity style={styles.optionButton} onPress={() => openURL('https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/y5npt4d5_expires_30_days.png')}>
+            <Text style={styles.optionText}>FAQ</Text>
+          </TouchableOpacity>
 
-			{/* Bottom Navigation */}
-			<Navbar onLogout={handleLogout} />
+          <TouchableOpacity style={styles.optionButton} onPress={() => openURL('https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/jahr92jf_expires_30_days.png')}>
+            <Text style={styles.optionText}>Contact Support</Text>
+          </TouchableOpacity>
+        </View>
 
-			{/* Hamburger Menu */}
-			<HamburgerMenu
-				visible={showHamburgerMenu}
-				onClose={() => setShowHamburgerMenu(false)}
-			/>
-		</SafeAreaView>
-	);
+        {/* Request Support */}
+        <View style={styles.supportContainer}>
+          <Text style={styles.sectionTitle}>Request Support</Text>
+
+          <Text style={styles.label}>Subject</Text>
+          <TextInput
+            placeholder="Enter subject"
+            value={subject}
+            onChangeText={setSubject}
+            style={[styles.input, { height: 60, textAlignVertical: 'top' }]}
+            placeholderTextColor="#9CA3AF"
+          />
+
+          <Text style={styles.label}>Message</Text>
+          <TextInput
+            placeholder="Enter message"
+            value={message}
+            onChangeText={setMessage}
+            multiline
+            numberOfLines={4}
+            style={[styles.input, { height: 100, textAlignVertical: 'top' }]}
+            placeholderTextColor="#9CA3AF"
+          />
+
+          <TouchableOpacity style={styles.submitButton} onPress={() => alert('Support request submitted!')}>
+            <Text style={styles.submitButtonText}>Continue</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+
+      {/* Navbar & Hamburger */}
+      {/* <Navbar onLogout={handleLogout} /> */}
+      <HamburgerMenu visible={showHamburgerMenu} onClose={() => setShowHamburgerMenu(false)} />
+    </SafeAreaView>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 24,
+    paddingVertical: 8
+  },
+  iconButton: {
+    borderWidth: 1,
+    borderColor: '#FACC15',
+    borderRadius: 12,
+    padding: 8
+  },
+  rightIcons: {
+    flexDirection: 'row'
+  },
+  rightIconSpacing: {
+    marginRight: 16
+  },
+  headerTitle: {
+    color: '#374061',
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
+  optionsContainer: {
+    marginHorizontal: 16,
+    marginBottom: 16
+  },
+  optionButton: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    backgroundColor: 'white', 
+    borderWidth: 1, 
+    borderColor: '#D1D5DB', 
+    borderRadius: 12, 
+    padding: 16, 
+    marginBottom: 12, 
+    elevation: 3 
+  },
+  optionText: { 
+    flex: 1, 
+    fontSize: 14, 
+    fontWeight: '600', 
+    color: '#000000' 
+  },
+  supportContainer: {
+    marginHorizontal: 16,
+    marginBottom: 64
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#1F2937',
+    marginBottom: 16
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#1F2937',
+    marginBottom: 8,
+    marginTop: 16
+  },
+  input: {  
+    backgroundColor: 'white', 
+    borderWidth: 1, 
+    borderColor: '#EAEAEA', 
+    borderRadius: 12, 
+    padding: 12, 
+    fontSize: 16, 
+    color: '#1F2937' 
+  },
+  submitButton: { 
+    backgroundColor: '#1E3A8A', 
+    borderRadius: 12, 
+    paddingVertical: 12, 
+    alignItems: 'center', 
+    marginTop: 24 
+  },
+  submitButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '500'
+  }
+});

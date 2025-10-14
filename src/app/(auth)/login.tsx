@@ -14,7 +14,9 @@ import {
   StyleSheet,
 } from 'react-native';
  import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
 
 // For development only - OTP storage
 export const otpStore = new Map();
@@ -35,49 +37,52 @@ type Props = {
   route: LoginScreenRouteProp;
 };
 
-const LoginScreen: React.FC<Props> = ({ navigation }:any) => {
+const LoginScreen: React.FC<Props> = () => {
+  const navigation = useNavigation()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
-    if (!email) {
-      Alert.alert('Error', 'Please enter your email');
-      return;
-    }
+          navigation.navigate('TabLayout', { identifier: email, isPhone: 'false' });
 
-    if (!password) {
-      Alert.alert('Error', 'Please enter your password');
-      return;
-    }
+    // if (!email) {
+    //   Alert.alert('Error', 'Please enter your email');
+    //   return;
+    // }
 
-    try {
-      setLoading(true);
+    // if (!password) {
+    //   Alert.alert('Error', 'Please enter your password');
+    //   return;
+    // }
 
-      if (email === 'test@example.com' && password === 'password') {
-        navigation.replace('Tabs');
-        setLoading(false);
-        return;
-      }
+    // try {
+    //   setLoading(true);
 
-      const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    //   if (email === 'test@example.com' && password === 'password') {
+    //     navigation.replace('Tabs');
+    //     setLoading(false);
+    //     return;
+    //   }
 
-      otpStore.set(email, {
-        otp,
-        createdAt: new Date(),
-        attempts: 0,
-      });
+    //   const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
-      console.log(`OTP for ${email}: ${otp}`);
-      Alert.alert('Development Mode', `Your OTP is: ${otp}`);
+    //   otpStore.set(email, {
+    //     otp,
+    //     createdAt: new Date(),
+    //     attempts: 0,
+    //   });
 
-      navigation.push('OTP', { identifier: email, isPhone: 'false' });
-      setLoading(false);
-    } catch (error) {
-      Alert.alert('Login Failed', 'Failed to login. Please try again.');
-      setLoading(false);
-    }
+    //   console.log(`OTP for ${email}: ${otp}`);
+    //   Alert.alert('Development Mode', `Your OTP is: ${otp}`);
+
+    //   navigation.push('OTP', { identifier: email, isPhone: 'false' });
+    //   setLoading(false);
+    // } catch (error) {
+    //   Alert.alert('Login Failed', 'Failed to login. Please try again.');
+    //   setLoading(false);
+    // }
   };
 
   const handleGoogleSignIn = async () => {
@@ -170,41 +175,30 @@ const LoginScreen: React.FC<Props> = ({ navigation }:any) => {
               <Text style={{ fontSize: 16, fontWeight: '500', color: '#4B5563', marginBottom: 8 }}>
                 電子郵件
               </Text>
-            <TextInput
-        placeholder="輸入您的電子郵件"
-        value={email}
+         <CustomInput
+              placeholder={'Enter your email'}
+               value={email}
         onChangeText={setEmail}
-        style={styles.input}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false} // optional
-      />
-              <Text style={{ fontSize: 16, fontWeight: '500', color: '#4B5563', marginBottom: 8 }}>
+              
+              />
+              <Text style={{ marginTop:11, fontSize: 16, fontWeight: '500', color: '#4B5563', marginBottom: 8 }}>
                 密碼
               </Text>
-              {/* <TextInput
-                mode="outlined"
-                placeholder="輸入您的密碼"
-                value={password}
+                <CustomInput
+              placeholder={'Password'}
+              secureTextEntryToggle
+                 value={password}
                 onChangeText={setPassword}
-                style={{ marginBottom: 16, height: 56, backgroundColor: '#fff' }}
-                secureTextEntry={!showPassword}
-                outlineColor="#E5E5E5"
-                activeOutlineColor="#6366F1"
-                right={
-                  <TextInput.Icon
-                    icon={showPassword ? 'eye-off' : 'eye'}
-                    onPress={toggleShowPassword}
-                    color="#9CA4AB"
-                  />
-                }
-              /> */}
-
+             
+             
+           
+              />
+              
               <TouchableOpacity
                 style={{ alignSelf: 'flex-end', marginBottom: 20 }}
                 onPress={() => navigation.push('ForgotPassword')}
               >
-                <Text style={{ color: '#2563EB', fontSize: 14, fontWeight: '500' }}>忘記密碼?</Text>
+                <Text style={{ color: '#2563EB', marginTop:15 ,fontSize: 14, fontWeight: '500' }}>忘記密碼?</Text>
               </TouchableOpacity>
 {/* 
               <Button
@@ -218,9 +212,9 @@ const LoginScreen: React.FC<Props> = ({ navigation }:any) => {
               >
                 登入
               </Button> */}
-
+<CustomButton title={"Log In"}    onPress={handleLogin}/>
               {/* Divider */}
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 24 }}>
+              <View style={{  flexDirection: 'row', alignItems: 'center', marginVertical: 24 }}>
                 <View style={{ flex: 1, height: 1, backgroundColor: '#E5E7EB' }} />
                 <Text style={{ marginHorizontal: 16, color: '#6B7280', fontSize: 12 }}>
                   或選擇其他登入方式
@@ -279,7 +273,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }:any) => {
               {/* Footer */}
               <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 24 }}>
                 <Text style={{ color: '#6B7280', fontSize: 14 }}>還沒有帳號嗎? </Text>
-                <TouchableOpacity onPress={() => navigation.push('Register')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                   <Text style={{ color: '#1E40AF', fontSize: 14, fontWeight: '600' }}>註冊</Text>
                 </TouchableOpacity>
               </View>

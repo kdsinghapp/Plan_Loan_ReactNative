@@ -12,6 +12,7 @@ import {
   Image,
   StyleSheet
 } from 'react-native';
+import CustomInput from '../../components/CustomInput';
 // import { Checkbox } from 'react-native-paper';
 
 const RegisterScreen = () => {
@@ -148,50 +149,58 @@ const RegisterScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardAvoidingView}
       >
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             {/* Auth Background Image */}
             <View style={styles.imageContainer}>
-              {/* <Image
-                source={require('../assets/images/auth/bg.png')} // Update path as needed
-                style={styles.backgroundImage}
-              /> */}
+              <Image
+                              source={require('../../assets/images/auth/bg.png')} // Update path as needed
+
+                 style={styles.backgroundImage}
+              />
               <View style={styles.overlay} />
               <View style={styles.textContainer}>
-                <Text style={styles.title}>Create Account</Text>
-                <Text style={styles.subtitle}>Sign up to get started</Text>
+                <Text style={styles.title}>Sign Up</Text>
+                <Text style={styles.subtitle}>Let's get started by creating your account</Text>
               </View>
             </View>
             
             {/* Form Section */}
             <View style={styles.formContainer}>
               <Text style={styles.label}>Email Address</Text>
-              <TextInput
-                style={styles.textInput}
+         
+       <CustomInput
                 placeholder="Enter your email"
+              secureTextEntryToggle
+       
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
+             
+           
               />
-
-              <Text style={styles.label}>Password</Text>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Enter your password"
-                value={password}
+              <Text style={styles.label}>Phone</Text>
+            
+                 <CustomInput
+                placeholder="Enter your phone"
+              secureTextEntryToggle
+             value={password}
                 onChangeText={setPassword}
-                secureTextEntry={!showPassword}
+             
+             
+           
               />
 
               <Text style={styles.label}>Confirm Password</Text>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Confirm your password"
-                value={confirmPassword}
+               <CustomInput
+   placeholder="Confirm your password"              secureTextEntryToggle
+            value={confirmPassword}
                 onChangeText={setConfirmPassword}
-                secureTextEntry={!showConfirmPassword}
+             
+           
               />
+ 
 
               <View style={styles.checkboxContainer}>
                 {/* <Checkbox
@@ -229,20 +238,20 @@ const RegisterScreen = () => {
                   style={styles.socialButton}
                   onPress={handleGoogleSignIn}
                 >
-                  {/* <Image
-                    source={require('../assets/images/google.png')} // Update path as needed
+                  <Image
+                    source={require('../../assets/images/google.png')}
                     style={styles.socialIcon}
-                  /> */}
+                  />
                   <Text style={styles.socialButtonText}>Google</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.socialButton}
                   onPress={handleAppleSignIn}
                 >
-                  {/* <Image
-                    source={require('../../assets/images/auth/apple.png')} // Update path as needed
+                  <Image
+                    source={require('../../assets/images/apple.png')} // Update path as needed
                     style={styles.socialIcon}
-                  /> */}
+                  />
                   <Text style={styles.socialButtonText}>Apple</Text>
                 </TouchableOpacity>
               </View>
@@ -335,6 +344,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#374151',
     marginBottom: 8,
+    marginTop:10,
   },
   textInputBase: {
     borderWidth: 1,
@@ -357,6 +367,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 14,
     color: '#6B7280',
+    marginTop:13
   },
   boldText: {
     fontWeight: '600',

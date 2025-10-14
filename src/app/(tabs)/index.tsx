@@ -1,446 +1,220 @@
-import { useRouter } from 'expo-router';
 import React, { useState } from "react";
-import { Alert, Image, ImageBackground, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  ImageBackground,
+   ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+} from "react-native";
+import { useNavigation, useRoute, NavigationProp } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Navbar = require('../../components/Navbar').default;
 const HamburgerMenu = require('../../components/HamburgerMenu').default;
 
 export default function HomeScreen() {
-	const router = useRouter();
-	const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+  const navigation = useNavigation<NavigationProp<any>>();
+  const route = useRoute();
+  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
-	const handleLogout = () => {
-		Alert.alert(
-			'Logout',
-			'Are you sure you want to logout?',
-			[
-				{
-					text: 'Cancel',
-					style: 'cancel'
-				},
-				{
-					text: 'Logout',
-					style: 'destructive',
-					onPress: () => {
-						router.replace('/(auth)/login');
-					}
-				}
-			]
-		);
-	};
-	return (
-		<SafeAreaView className="flex-1 bg-white">
-			<ScrollView className="flex-1 bg-white">
-				{/* Top Header with buttons */}
-				<View className="flex-row items-center justify-between mb-6 mx-6 mt-4 py-8">
-					{/* Left side - Hamburger menu */}
-					<TouchableOpacity
-						className="border border-yellow-500 rounded-xl p-2"
-						onPress={() => setShowHamburgerMenu(true)}>
-						<Image
-							source={require('../../assets/images/icons/menu.png')}
-							resizeMode="contain"
-							className="w-6 h-6"
-						/>
-					</TouchableOpacity>
 
-					{/* Center - Title */}
-					<Text className="text-slate-700 text-2xl font-bold">
-						{"首頁"}
-					</Text>
-					{/* Right side - Action buttons */}
-					<View className="flex-row">
-						<TouchableOpacity
-							className="border border-yellow-500 rounded-xl p-2 mr-4"
-							onPress={()=>alert('Pressed!')}>
-							<Image
-								source={require('../../assets/images/icons/call.png')}
-								resizeMode="contain"
-								className="w-6 h-6"
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							className="border border-yellow-500 rounded-xl p-2"
-							onPress={() => router.push('/(tabs)/notifications')}>
-							<Image
-								source={require('../../assets/images/icons/notification.png')}
-								resizeMode="contain"
-								className="w-6 h-6"
-							/>
-						</TouchableOpacity>
-					</View>
-				</View>
-				<View className="mb-5 mx-6">
-					<View
-						className="rounded-xl mb-6 p-4 relative"
-						style={{
-							backgroundColor: '#374061', // More bluish color to match your design
-							borderRadius: 12,
-							minHeight: 180
-						}}>
-						{/* Loan Card Background - Top Right Edge */}
-						<View className="absolute top-2 right-2 w-16 h-16">
-							<Image
-								source={require('../../assets/images/home/loan-card.png')}
-								resizeMode="cover"
-								className="w-full h-full rounded-xl"
-							/>
-						</View>
 
-						{/* Hi Steve greeting */}
-						<View className="flex-row items-center mb-2">
-							<Image
-								source={require('../../assets/images/home/greeting-avatar.png')}
-								resizeMode="contain"
-								className="w-6 h-6 mr-2"
-							/>
-							<Text className="text-white text-base font-bold">
-								{"Hi Steve!"}
-							</Text>
-						</View>
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scroll} 
+	  showsVerticalScrollIndicator={false}
+	  >
+        {/* Top Header */}
+        <View style={styles.header}>
+          {/* Hamburger Menu */}
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => setShowHamburgerMenu(true)}
+          >
+            <Image
+              source={require('../../assets/images/icons/menu.png')}
+              style={styles.iconSmall}
+            />
+          </TouchableOpacity>
 
-						{/* Loan Amount Section */}
-						<Text className="text-white text-lg font-bold mb-2">
-							{"您的可貸額度為"}
-						</Text>
-						<Text className="text-yellow-400 text-3xl font-bold mb-4">
-							{"NT $ 10,000"}
-						</Text>
+          {/* Title */}
+          <Text style={styles.headerTitle}>Home</Text>
 
-						{/* Progress Bar */}
-						<View className="bg-gray-300 rounded-full h-2 mb-4">
-							<View className="bg-yellow-400 h-2 rounded-full" style={{ width: '75%' }} />
-						</View>
+          {/* Right Action Buttons */}
+          <View style={styles.headerRight}>
+            <TouchableOpacity
+              style={[styles.iconButton, { marginRight: 12 }]}
+              onPress={() => alert('Pressed!')}
+            >
+              <Image
+                source={require('../../assets/images/icons/call.png')}
+                style={styles.iconSmall}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => navigation.navigate('NotificationsScreen')}
+            >
+              <Image
+                source={require('../../assets/images/icons/notification.png')}
+                style={styles.iconSmall}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
 
-						{/* Want To Borrow More Button - Fixed positioning */}
-						<View className="flex-row justify-end">
-							<TouchableOpacity
-								className="bg-yellow-500 rounded-lg px-4 py-2 justify-center items-center"
-								onPress={() => router.push('/(tabs)/loan/apply')}>
-								<Text className="text-gray-800 text-sm font-bold">
-									{"想要借更多嗎?"}
-								</Text>
-							</TouchableOpacity>
-						</View>
-					</View>
-					</View>
-					<View className="flex-row items-center bg-blue-50 border border-blue-300 rounded-xl py-3 px-2 mb-6">
-						<View className="flex-1 flex-row mr-3">
-							<Image
-								source={require('../../assets/images/home/amount-repaid.png')}
-								resizeMode="contain"
-								className="w-12 h-12 mr-2"
-							/>
-							<View className="flex-1 px-2">
-								<Text className="text-gray-800 text-xl font-bold mb-2">
-									{"已還款金額"}
-								</Text>
-								<Text className="text-gray-500 text-sm">
-									{"Lorem Ipsum"}
-								</Text>
-							</View>
-						</View>
-						<ImageBackground
-							source={require('../../assets/images/home/progress-bg.png')}
-							resizeMode="stretch"
-							className="py-5 px-4"
-							>
-							<Text className="text-slate-700 text-base font-bold">
-								{"75%"}
-							</Text>
-						</ImageBackground>
-					</View>
-					<View className="mx-6">
-						<View className="flex-row items-center mb-3">
-							<Text className="text-gray-800 text-2xl font-bold flex-1">
-								{"貸款歷史"}
-							</Text>
-							<Image
-								source={require('../../assets/images/home/history.png')}
-								resizeMode="contain"
-								style={{
-									width: 24,
-									height: 24,
-								}}
-							/>
-						</View>
-						<View >
-							<View 
-								style={{
-									flexDirection: "row",
-									alignItems: "center",
-									marginBottom: 14,
-								}}>
-								<View 
-									style={{
-										flex: 1,
-										flexDirection: "row",
-										alignItems: "center",
-										marginRight: 12,
-									}}>
-									<Image
-										source={require('../../assets/images/home/loan-received.png')}
-										resizeMode="contain"
-										style={{
-											width: 45,
-											height: 45,
-											marginRight: 10,
-										}}
-									/>
-									<View 
-										style={{
-											flex: 1,
-										}}>
-										<Text 
-											style={{
-												color: "#374061",
-												fontSize: 14,
-												fontWeight: "bold",
-												marginBottom: 2,
-											}}>
-											{"貸款已入帳"}
-										</Text>
-										<Text 
-											style={{
-												color: "#F8B01D",
-												fontSize: 12,
-											}}>
-											{"Loan of N30,000 wasreceived"}
-										</Text>
-									</View>
-								</View>
-								<Image
-									source={require('../../assets/images/home/arrow-right.png')}
-									resizeMode="contain"
-									style={{
-										width: 18,
-										height: 18,
-									}}
-								/>
-							</View>
-							<View 
-								style={{
-									flexDirection: "row",
-									alignItems: "center",
-									marginBottom: 14,
-								}}>
-								<View 
-									style={{
-										flex: 1,
-										flexDirection: "row",
-										alignItems: "center",
-										marginRight: 12,
-									}}>
-									<Image
-										source={require('../../assets/images/home/loan-disbursed.png')}
-										resizeMode="contain"
-										style={{
-											width: 45,
-											height: 45,
-											marginRight: 10,
-										}}
-									/>
-									<View 
-										style={{
-											flex: 1,
-										}}>
-										<Text 
-											style={{
-												color: "#374061",
-												fontSize: 14,
-												fontWeight: "bold",
-												marginBottom: 2,
-											}}>
-											{"貸款已撥款"}
-										</Text>
-										<Text 
-											style={{
-												color: "#F8B01D",
-												fontSize: 12,
-											}}>
-											{"N30,000 was disbursed to your bank"}
-										</Text>
-									</View>
-								</View>
-								<Image
-									source={require('../../assets/images/home/arrow-right.png')}
-									resizeMode="contain"
-									style={{
-										width: 18,
-										height: 18,
-									}}
-								/>
-							</View>
-							<View 
-								style={{
-									flexDirection: "row",
-									alignItems: "center",
-									marginBottom: 14,
-								}}>
-								<View 
-									style={{
-										flex: 1,
-										flexDirection: "row",
-										alignItems: "center",
-										marginRight: 12,
-									}}>
-									<Image
-										source={require('../../assets/images/home/loan-approved.png')}
-										resizeMode="contain"
-										style={{
-											width: 45,
-											height: 45,
-											marginRight: 10,
-										}}
-									/>
-									<View 
-										style={{
-											marginRight: 4,
-										}}>
-										<Text 
-											style={{
-												color: "#374061",
-												fontSize: 14,
-												fontWeight: "bold",
-												marginBottom: 2,
-											}}>
-											{"貸款已核准"}
-										</Text>
-										<Text 
-											style={{
-												color: "#F8B01D",
-												fontSize: 12,
-											}}>
-											{"N30,000 was approved"}
-										</Text>
-									</View>
-								</View>
-								<Image
-									source={require('../../assets/images/home/arrow-right.png')}
-									resizeMode="contain"
-									style={{
-										width: 18,
-										height: 18,
-									}}
-								/>
-							</View>
-							<View 
-								style={{
-									flexDirection: "row",
-									alignItems: "center",
-									marginBottom: 14,
-								}}>
-								<View 
-									style={{
-										flex: 1,
-										flexDirection: "row",
-										alignItems: "center",
-										marginRight: 12,
-									}}>
-									<Image
-										source={require('../../assets/images/home/loan-received.png')}
-										resizeMode="contain"
-										style={{
-											width: 45,
-											height: 45,
-											marginRight: 10,
-										}}
-									/>
-									<View 
-										style={{
-											flex: 1,
-										}}>
-										<Text 
-											style={{
-												color: "#374061",
-												fontSize: 14,
-												fontWeight: "bold",
-												marginBottom: 2,
-											}}>
-											{"貸款已入帳"}
-										</Text>
-										<Text 
-											style={{
-												color: "#F8B01D",
-												fontSize: 12,
-											}}>
-											{"Loan of N30,000 wasreceived"}
-										</Text>
-									</View>
-								</View>
-								<Image
-									source={require('../../assets/images/home/arrow-right.png')}
-									resizeMode="contain"
-									style={{
-										width: 18,
-										height: 18,
-									}}
-								/>
-							</View>
-							<View 
-								style={{
-									flexDirection: "row",
-									alignItems: "center",
-								}}>
-								<View 
-									style={{
-										flex: 1,
-										flexDirection: "row",
-										alignItems: "center",
-										marginRight: 12,
-									}}>
-									<Image
-										source={require('../../assets/images/home/loan-declined.png')}
-										resizeMode="contain"
-										style={{
-											width: 45,
-											height: 45,
-											marginRight: 10,
-										}}
-									/>
-									<View 
-										style={{
-											flex: 1,
-										}}>
-										<Text 
-											style={{
-												color: "#374061",
-												fontSize: 14,
-												fontWeight: "bold",
-												marginBottom: 2,
-											}}>
-											{"貸款已拒絕"}
-										</Text>
-										<Text 
-											style={{
-												color: "#F8B01D",
-												fontSize: 12,
-											}}>
-											{"We’re sorry! your loan was declined"}
-										</Text>
-									</View>
-								</View>
-								<Image
-									source={require('../../assets/images/home/arrow-right.png')}
-									resizeMode="contain"
-									style={{
-										width: 18,
-										height: 18,
-									}}
-								/>
-							</View>
-						</View>
-					</View>
-			</ScrollView>
+        {/* Loan Card */}
+        <View style={styles.loanCard}>
+          <View style={styles.loanCardImageContainer}>
+            <Image
+              source={require('../../assets/images/home/loan-card.png')}
+              style={styles.loanCardImage}
+            />
+          </View>
+          <View style={styles.greeting}>
+            <Image
+              source={require('../../assets/images/home/greeting-avatar.png')}
+              style={styles.avatar}
+            />
+            <Text style={styles.greetingText}>Hi Steve!</Text>
+          </View>
+          <Text style={styles.loanText}>您的可貸額度為</Text>
+          <Text style={styles.loanAmount}>NT $ 10,000</Text>
 
-			{/* Bottom Navigation */}
-			<Navbar onLogout={handleLogout} />
+          {/* Progress Bar */}
+          <View style={styles.progressBg}>
+            <View style={[styles.progressFill, { width: '75%' }]} />
+          </View>
 
-			{/* Hamburger Menu */}
-			<HamburgerMenu
-				visible={showHamburgerMenu}
-				onClose={() => setShowHamburgerMenu(false)}
-			/>
-		</SafeAreaView>
-	)
+          <View style={styles.borrowMoreContainer}>
+            <TouchableOpacity
+              style={styles.borrowMoreButton}
+              onPress={() => navigation.navigate('ApplyLoan')}
+            >
+              <Text style={styles.borrowMoreText}>Want To Borrow More?</Text>
+              {/* <Text style={styles.borrowMoreText}>想要借更多嗎?</Text> */}
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Amount Repaid */}
+        <View style={styles.repaidContainer}>
+          <View style={styles.repaidLeft}>
+            <Image
+              source={require('../../assets/images/home/amount-repaid.png')}
+              style={styles.repaidIcon}
+            />
+            <View style={styles.repaidTextContainer}>
+              <Text style={styles.repaidTitle}>Repaid Amount</Text>
+              {/* <Text style={styles.repaidTitle}>已還款金額</Text> */}
+              <Text style={styles.repaidSubtitle}>Lorem Ipsum</Text>
+            </View>
+          </View>
+          <ImageBackground
+            source={require('../../assets/images/home/progress-bg.png')}
+            style={styles.repaidRight}
+            resizeMode="stretch"
+          >
+            <Text style={styles.repaidPercentage}>75%</Text>
+          </ImageBackground>
+        </View>
+
+        {/* Loan History */}
+        <View style={styles.loanHistoryContainer}>
+          <View style={styles.loanHistoryHeader}>
+            <Text style={styles.loanHistoryTitle}>Loan History</Text>
+            {/* <Text style={styles.loanHistoryTitle}>貸款歷史</Text> */}
+            <Image
+              source={require('../../assets/images/home/history.png')}
+              style={styles.loanHistoryIcon}
+            />
+          </View>
+
+          {/* Loan History Items */}
+          {[
+            { img: 'loan-received', title: '貸款已入帳', desc: 'Loan of N30,000 was received' },
+            { img: 'loan-disbursed', title: '貸款已撥款', desc: 'N30,000 was disbursed to your bank' },
+            { img: 'loan-approved', title: '貸款已核准', desc: 'N30,000 was approved' },
+            { img: 'loan-received', title: '貸款已入帳', desc: 'Loan of N30,000 was received' },
+            { img: 'loan-declined', title: '貸款已拒絕', desc: 'We’re sorry! your loan was declined' },
+          ].map((item, index) => (
+            <View key={index} style={styles.historyItem}>
+              <View style={styles.historyItemLeft}>
+                <Image
+              source={require('../../assets/images/home/history.png')}
+                  style={styles.historyItemIcon}
+                />
+                <View style={styles.historyItemText}>
+                  <Text style={styles.historyItemTitle}>{item.title}</Text>
+                  <Text style={styles.historyItemDesc}>{item.desc}</Text>
+                </View>
+              </View>
+              <Image
+                source={require('../../assets/images/home/arrow-right.png')}
+                style={styles.historyItemArrow}
+              />
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+
+      {/* Bottom Navigation */}
+      {/* <Navbar 	={handleLogout} /> */}
+
+      {/* Hamburger Menu */}
+      <HamburgerMenu
+        visible={showHamburgerMenu}
+        onClose={() => setShowHamburgerMenu(false)}
+      />
+    </SafeAreaView>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: 'white' },
+  scroll: { flex: 1 },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 24, marginTop: 16, marginBottom: 24, paddingVertical: 8 },
+  iconButton: { borderWidth: 1, borderColor: '#FACC15', borderRadius: 12, padding: 8 },
+  iconSmall: { width: 24, height: 24 },
+  headerTitle: { fontSize: 24, fontWeight: 'bold', color: '#374151' },
+  headerRight: { flexDirection: 'row' },
+
+  loanCard: { backgroundColor: '#374061', borderRadius: 12, marginHorizontal: 24, padding: 16, minHeight: 180, marginBottom: 24, position: 'relative' },
+  loanCardImageContainer: { position: 'absolute', top: 8, right: 8, width: 64, height: 64 },
+  loanCardImage: { width: '100%', height: '100%', borderRadius: 12 },
+  greeting: { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
+  avatar: { width: 24, height: 24, marginRight: 8 },
+  greetingText: { fontSize: 16, fontWeight: 'bold', color: 'white' },
+  loanText: { fontSize: 16, fontWeight: 'bold', color: 'white', marginBottom: 4 },
+  loanAmount: { fontSize: 28, fontWeight: 'bold', color: '#FACC15', marginBottom: 8 },
+  progressBg: { height: 8, borderRadius: 4, backgroundColor: '#D1D5DB', marginBottom: 8 },
+  progressFill: { height: 8, borderRadius: 4, backgroundColor: '#FACC15' },
+  borrowMoreContainer: { flexDirection: 'row', justifyContent: 'flex-end' },
+  borrowMoreButton: { backgroundColor: '#FACC15', borderRadius: 8, paddingVertical: 6, paddingHorizontal: 16 },
+  borrowMoreText: { color: '#1F2937', fontWeight: 'bold', fontSize: 14 },
+
+  repaidContainer: { flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#93C5FD', borderRadius: 12, backgroundColor: '#EFF6FF', marginHorizontal: 24, padding: 8, marginBottom: 24 },
+  repaidLeft: { flexDirection: 'row', flex: 1, alignItems: 'center', marginRight: 12 },
+  repaidIcon: { width: 48, height: 48, marginRight: 8 },
+  repaidTextContainer: { flex: 1 },
+  repaidTitle: { fontSize: 18, fontWeight: 'bold', color: '#1E293B', marginBottom: 2 },
+  repaidSubtitle: { fontSize: 12, color: '#6B7280' },
+  repaidRight: { paddingVertical: 16, paddingHorizontal: 16, justifyContent: 'center', alignItems: 'center' },
+  repaidPercentage: { fontSize: 16, fontWeight: 'bold', color: '#1E293B' },
+
+  loanHistoryContainer: { marginHorizontal: 24, marginBottom: 24 },
+  loanHistoryHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
+  loanHistoryTitle: { flex: 1, fontSize: 24, fontWeight: 'bold', color: '#1E293B' },
+  loanHistoryIcon: { width: 24, height: 24 },
+
+  historyItem: { flexDirection: 'row', alignItems: 'center', marginBottom: 14 },
+  historyItemLeft: { flex: 1, flexDirection: 'row', alignItems: 'center', marginRight: 12 },
+  historyItemIcon: { width: 45, height: 45, marginRight: 10 },
+  historyItemText: { flex: 1 },
+  historyItemTitle: { fontSize: 14, fontWeight: 'bold', color: '#374061', marginBottom: 2 },
+  historyItemDesc: { fontSize: 12, color: '#F8B01D' },
+  historyItemArrow: { width: 18, height: 18 },
+});

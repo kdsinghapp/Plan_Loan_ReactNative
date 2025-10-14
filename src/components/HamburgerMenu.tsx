@@ -1,6 +1,6 @@
-import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 interface HamburgerMenuProps {
   visible: boolean;
@@ -8,189 +8,124 @@ interface HamburgerMenuProps {
 }
 
 const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
-	const router = useRouter();
-	const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const navigation = useNavigation<any>();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-	const handleNavigation = (route: string) => {
-		onClose();
-		router.push(route as any);
-	};
+  const handleNavigation = (route: string) => {
+    onClose();
+    navigation.navigate(route);
+  };
 
-	const handleLogoutPress = () => {
-		setShowLogoutModal(true);
-	};
+  const handleLogoutPress = () => {
+    setShowLogoutModal(true);
+  };
 
-	const handleLogoutConfirm = () => {
-		setShowLogoutModal(false);
-		onClose();
-		// TODO: Implement logout functionality
-		console.log('Logout confirmed');
-		router.push('/(auth)/login');
-	};
+  const handleLogoutConfirm = () => {
+    setShowLogoutModal(false);
+    onClose();
+    console.log('Logout confirmed');
+    navigation.navigate('Login'); // adjust to your login screen
+  };
 
-	const handleLogoutCancel = () => {
-		setShowLogoutModal(false);
-	};
+  const handleLogoutCancel = () => {
+    setShowLogoutModal(false);
+  };
 
-	return (
-		<>
-			{/* Main Hamburger Menu */}
-			<Modal
-				visible={visible && !showLogoutModal}
-				animationType="fade"
-				transparent={true}
-				onRequestClose={onClose}
-			>
-				<View className="flex-1 flex-row bg-black/40">
-					{/* Menu Panel - Full height, slides from left */}
-					<View className="bg-white h-full shadow-2xl" style={{ width: '80%' }}>
-						<ScrollView className="flex-1 pt-24">
-							{/* Profile Section */}
-							<View className="flex-row items-center justify-between mb-20 mx-6">
-								<View className="flex-row items-center flex-1">
-									<Image
-										source={require('../assets/images/menu/profile-avatar.png')}
-										resizeMode="cover"
-										className="w-20 h-20 mr-3 rounded-full"
-									/>
-									<View className="flex-1">
-										<Text className="text-black text-lg font-bold mb-1">
-											John Smith
-										</Text>
-										<Text className="text-black text-sm">
-											johnsmith@example.com
-										</Text>
-									</View>
-								</View>
-								{/* Close button positioned correctly */}
-								<TouchableOpacity
-									className="border border-gray-300 rounded-xl p-2 ml-2"
-									onPress={onClose}>
-									<Text className="text-gray-600 text-lg font-bold">×</Text>
-								</TouchableOpacity>
-							</View>
-							{/* Menu Items */}
-							<View className="mb-16 ml-6">
-								{/* Home */}
-								<TouchableOpacity
-									className="flex-row items-center py-3 px-4 mb-8"
-									onPress={() => handleNavigation('/(tabs)')}>
-									<Image
-										source={require('../assets/images/menu/home.png')}
-										resizeMode="contain"
-										className="w-6 h-6 mr-3"
-									/>
-									<Text className="text-slate-700 text-lg font-bold">
-										首頁
-									</Text>
-								</TouchableOpacity>
+  return (
+    <>
+      {/* Main Hamburger Menu */}
+      <Modal
+        visible={visible && !showLogoutModal}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={onClose}
+      >
+        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'rgba(0,0,0,0.4)' }}>
+          <View style={{ width: '80%', backgroundColor: 'white', shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 4, elevation: 10 }}>
+            <ScrollView contentContainerStyle={{ paddingTop: 100 }}>
+              {/* Profile */}
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 16, marginBottom: 40 }}>
+                <Image
+                  source={require('../assets/images/menu/profile-avatar.png')}
+                  style={{ width: 80, height: 80, borderRadius: 40, marginRight: 12 }}
+                />
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black', marginBottom: 4 }}>John Smith</Text>
+                  <Text style={{ fontSize: 14, color: 'black' }}>johnsmith@example.com</Text>
+                </View>
+                <TouchableOpacity onPress={onClose}  >
+                  <Text style={{ fontSize: 30, color: 'black' }}>×</Text>
+                </TouchableOpacity>
+              </View>
 
-								{/* Settings */}
-								<TouchableOpacity
-									className="flex-row items-center py-3 px-4 mb-8"
-									onPress={() => handleNavigation('/(tabs)/settings/')}>
-									<Image
-										source={require('../assets/images/menu/settings.png')}
-										resizeMode="contain"
-										className="w-6 h-6 mr-3"
-									/>
-									<Text className="text-slate-700 text-lg font-bold">
-										設定
-									</Text>
-								</TouchableOpacity>
+              {/* Menu Items */}
+              <View style={{ marginLeft: 16 }}>
+                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('Home')}>
+                  <Image source={require('../assets/images/menu/home.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
+                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>Home</Text>
+                                  {/* <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>首頁</Text> */}
 
-								{/* Help & Feedback */}
-								<TouchableOpacity
-									className="flex-row items-center py-3 px-4 mb-8"
-									onPress={() => handleNavigation('/(tabs)/help/feedback')}>
-									<Image
-										source={require('../assets/images/menu/help.png')}
-										resizeMode="contain"
-										className="w-6 h-6 mr-3"
-									/>
-									<Text className="text-slate-700 text-lg font-bold">
-										幫助 & 回饋
-									</Text>
-								</TouchableOpacity>
+				</TouchableOpacity>
 
-								{/* How To Use */}
-								<TouchableOpacity
-									className="flex-row items-center py-3 px-4 mb-8"
-									onPress={() => handleNavigation('/(tabs)/help/how-to-use')}>
-									<Image
-										source={require('../assets/images/menu/howtouse.png')}
-										resizeMode="contain"
-										className="w-6 h-6 mr-3"
-									/>
-									<Text className="text-slate-700 text-lg font-bold">
-										如何使用
-									</Text>
-								</TouchableOpacity>
-							</View>
-							{/* Logout Button */}
-							<TouchableOpacity
-								className="flex-row items-center bg-red-50 w-[65%] border border-red-500 rounded-lg py-3 px-4 ml-6 mb-6"
-								onPress={handleLogoutPress}>
-								<Image
-									source={require('../assets/images/menu/logout.png')}
-									resizeMode="contain"
-									className="w-6 h-6 mr-3"
-								/>
-								<Text className="text-red-500 text-lg font-bold">
-									登出
-								</Text>
-							</TouchableOpacity>
-						</ScrollView>
-					</View>
+                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('Settings')}>
+                  <Image source={require('../assets/images/menu/settings.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
+				                    <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>Settings</Text>
 
-					{/* Overlay to close menu */}
-					<TouchableOpacity
-						className="flex-1"
-						onPress={onClose}
-						activeOpacity={1}
-					/>
-				</View>
-			</Modal>
+                  {/* <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>設定</Text> */}
+                </TouchableOpacity>
 
-			{/* Logout Confirmation Modal */}
-			<Modal
-				visible={showLogoutModal}
-				transparent={true}
-				animationType="fade"
-				onRequestClose={handleLogoutCancel}>
-				<View className="flex-1 justify-center items-center" style={{ backgroundColor: "#26262680" }}>
-					<View className="bg-white rounded-2xl p-5 mx-6 w-80">
-						<View className="mb-9 px-4">
-							<Text className="text-slate-700 text-2xl font-bold text-center mb-4">
-								Logout?
-							</Text>
-							<Text className="text-gray-500 text-sm text-center">
-								Are you sure you want to logout from this account?
-							</Text>
-						</View>
+                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('HelpFeedback')}>
+                  <Image source={require('../assets/images/menu/help.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
+                  {/* <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>幫助 & 回饋</Text> */}
+                                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>Help & Feedback</Text>
 
-						<View className="px-4">
-							<TouchableOpacity onPress={handleLogoutConfirm}>
-								<View className="items-center rounded-xl py-3 mb-4 bg-slate-700">
-									<Text className="text-white text-xl font-bold">
-										Yes
-									</Text>
-								</View>
-							</TouchableOpacity>
+				</TouchableOpacity>
 
-							<TouchableOpacity onPress={handleLogoutCancel}>
-								<View className="items-center rounded-xl py-3 bg-gray-200">
-									<Text className="text-slate-700 text-xl font-bold">
-										No
-									</Text>
-								</View>
-							</TouchableOpacity>
-						</View>
-					</View>
-				</View>
-			</Modal>
-		</>
-	);
+                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('HowToUse')}>
+                  <Image source={require('../assets/images/menu/howtouse.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
+                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>How To Use</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Logout Button */}
+              <TouchableOpacity
+                onPress={handleLogoutPress}
+                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fee2e2', borderColor: '#f87171', borderWidth: 1, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 16, marginLeft: 16, marginTop: 24, width: '65%' }}
+              >
+                <Image source={require('../assets/images/menu/logout.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
+                <Text style={{ color: '#f87171', fontSize: 16, fontWeight: 'bold' }}>Logout</Text>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+
+          {/* Overlay */}
+          <TouchableOpacity style={{ flex: 1 }} onPress={onClose} />
+        </View>
+      </Modal>
+
+      {/* Logout Confirmation */}
+      <Modal visible={showLogoutModal} transparent animationType="fade" onRequestClose={handleLogoutCancel}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(38,38,38,0.5)' }}>
+          <View style={{ backgroundColor: 'white', borderRadius: 20, padding: 20, width: 300 }}>
+            <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#374151', textAlign: 'center', marginBottom: 8 }}>Logout?</Text>
+            <Text style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 20 }}>Are you sure you want to logout from this account?</Text>
+
+            <TouchableOpacity onPress={handleLogoutConfirm}>
+              <View style={{ backgroundColor: '#374151', paddingVertical: 12, borderRadius: 12, marginBottom: 12, alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>Yes</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={handleLogoutCancel}>
+              <View style={{ backgroundColor: '#e5e7eb', paddingVertical: 12, borderRadius: 12, alignItems: 'center' }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#374151' }}>No</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    </>
+  );
 };
 
 export default HamburgerMenu;
