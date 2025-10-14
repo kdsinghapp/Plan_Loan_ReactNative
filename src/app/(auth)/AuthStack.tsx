@@ -16,6 +16,10 @@ import OtpScreen from './OTPScreen/OtpScreen';
 import CreatePassword from './CreateNewPassword/CreateNewPassword';
 import TabLayout from '../(tabs)/_layout';
 import NotificationsScreen from '../(tabs)/notifications';
+import EditProfileScreen from '../(tabs)/profile/edit';
+import HowToUseScreen from '../(tabs)/help/how-to-use';
+import HelpFeedbackScreen from '../(tabs)/help/feedback';
+import LegalPoliciesScreen from '../LegalPoliciesScreen';
  
 
 const Stack = createStackNavigator();
@@ -32,6 +36,12 @@ export default function AuthStack() {
             <Stack.Screen name="ForgotPassword" component={PasswordReset} />  
  <Stack.Screen name="OTP" component={OtpScreen} />
   <Stack.Screen name="NotificationsScreen" component={NotificationsScreen} />
+  <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+    <Stack.Screen name="HowToUseScreen" component={HowToUseScreen} />
+    <Stack.Screen name="HelpFeedback" component={HelpFeedbackScreen} />
+    {/* <Stack.Screen name="LegalPoliciesScreen" component={LegalPoliciesScreen} /> */}
+
+
 
  
   <Stack.Screen name="CreatePassword" component={CreatePassword} />  

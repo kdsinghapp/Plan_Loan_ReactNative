@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 
 interface PhotoPickerModalProps {
   visible: boolean;
@@ -21,53 +21,31 @@ const PhotoPickerModal: React.FC<PhotoPickerModalProps> = ({
       animationType="fade"
       onRequestClose={onClose}
     >
-      <SafeAreaView className="flex-1">
-        <ScrollView className="flex-1 bg-gray-600/50">
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
           {/* Backdrop - tap to close */}
-          <TouchableOpacity
-            className="flex-1 pt-80 pb-80"
-            activeOpacity={1}
-            onPress={onClose}
-          >
-            <View className="flex-1 justify-center items-center px-6">
+          <TouchableOpacity style={styles.backdrop} activeOpacity={1} onPress={onClose}>
+            <View style={styles.centeredView}>
               {/* Modal Content */}
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl p-5 w-full"
-              >
+              <TouchableOpacity activeOpacity={1} onPress={(e) => e.stopPropagation()} style={styles.modalContent}>
+                
                 {/* Header */}
-                <View className="mb-9 mx-8">
-                  <Text className="text-slate-700 text-2xl font-bold mb-4 text-center">
-                    Upload Profile Picture
-                  </Text>
-                  <Text className="text-gray-500 text-sm text-center">
-                    Please select to upload your profile picture.
-                  </Text>
+                <View style={styles.header}>
+                  <Text style={styles.title}>Upload Profile Picture</Text>
+                  <Text style={styles.subtitle}>Please select to upload your profile picture.</Text>
                 </View>
 
                 {/* Action Buttons */}
-                <View>
-                  {/* Camera Button */}
-                  <TouchableOpacity
-                    onPress={onCamera}
-                    className="mb-4 bg-slate-700 items-center rounded-lg py-3"
-                  >
-                    <Text className="text-white text-xl font-bold">
-                      Camera
-                    </Text>
+                <View style={styles.actions}>
+                  <TouchableOpacity onPress={onCamera} style={styles.cameraButton}>
+                    <Text style={styles.cameraText}>Camera</Text>
                   </TouchableOpacity>
 
-                  {/* Gallery Button */}
-                  <TouchableOpacity
-                    onPress={onGallery}
-                    className="bg-slate-100 border border-slate-300 items-center rounded-lg py-3"
-                  >
-                    <Text className="text-slate-700 text-xl font-bold">
-                      Gallery
-                    </Text>
+                  <TouchableOpacity onPress={onGallery} style={styles.galleryButton}>
+                    <Text style={styles.galleryText}>Gallery</Text>
                   </TouchableOpacity>
                 </View>
+
               </TouchableOpacity>
             </View>
           </TouchableOpacity>
@@ -76,5 +54,21 @@ const PhotoPickerModal: React.FC<PhotoPickerModalProps> = ({
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: { flex: 1 },
+  scrollView: { flexGrow: 1, backgroundColor: 'rgba(107,114,128,0.5)' }, // gray-600/50
+  backdrop: { flex: 1, paddingVertical: 200 },
+  centeredView: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 24 },
+  modalContent: { backgroundColor: '#fff', borderRadius: 24, padding: 20, width: '100%' },
+  header: { marginBottom: 36, marginHorizontal: 16 },
+  title: { fontSize: 24, fontWeight: 'bold', color: '#334155', textAlign: 'center', marginBottom: 8 }, // text-slate-700
+  subtitle: { fontSize: 14, color: '#6B7280', textAlign: 'center' }, // text-gray-500
+  actions: { },
+  cameraButton: { marginBottom: 16, backgroundColor: '#334155', alignItems: 'center', borderRadius: 12, paddingVertical: 12 },
+  cameraText: { fontSize: 18, fontWeight: 'bold', color: '#fff' },
+  galleryButton: { backgroundColor: '#F1F5F9', borderWidth: 1, borderColor: '#D1D5DB', alignItems: 'center', borderRadius: 12, paddingVertical: 12 },
+  galleryText: { fontSize: 18, fontWeight: 'bold', color: '#334155' },
+});
 
 export default PhotoPickerModal;

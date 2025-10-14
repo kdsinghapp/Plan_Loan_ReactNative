@@ -81,8 +81,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       borderTopWidth: 1,
       borderTopColor: '#E5E7EB', 
-      marginBottom:11
-  
+      marginBottom:11,
   },
   tabItem: {
     flexDirection: 'row',
@@ -91,9 +90,14 @@ const styles = StyleSheet.create({
       paddingVertical: 8,
       borderRadius: 24,
       backgroundColor: 'transparent',
+ 
   },
   activeTab: {
   backgroundColor: '#334155',
+  width:120 ,alignItems:"center" ,
+  justifyContent:"center" ,
+  height:43
+ 
   },
   icon: {
   width: 20,

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Alert, 
-  SafeAreaView, 
-  ScrollView, 
+   ScrollView, 
   Text, 
   TextInput, 
   TouchableOpacity, 
@@ -16,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 // Import your custom components
 import Navbar from '../../../components/Navbar';
 import HamburgerMenu from '../../../components/HamburgerMenu';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HelpScreen() {
   const navigation = useNavigation();

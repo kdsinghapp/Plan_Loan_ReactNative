@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import {
   Alert,
   Image,
-  SafeAreaView,
-  ScrollView,
+   ScrollView,
   Text,
   TouchableOpacity,
   View
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Navbar = require('../../../components/Navbar').default;
 const HamburgerMenu = require('../../../components/HamburgerMenu').default;

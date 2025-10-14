@@ -196,7 +196,7 @@ export default function ProfileScreen() {
 
           {/* Edit Profile Button */}
           <TouchableOpacity
-            onPress={() => navigation.navigate('EditProfile')}
+            onPress={() => navigation.navigate('EditProfileScreen')}
             style={{
               backgroundColor: '#1E3A8A',
               borderRadius: 12,

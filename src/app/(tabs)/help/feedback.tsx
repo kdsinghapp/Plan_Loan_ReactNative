@@ -1,194 +1,157 @@
-import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Image,   ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function HelpFeedbackScreen() {
-	const router = useRouter();
-	const [subject, setSubject] = useState('');
-	const [message, setMessage] = useState('');
-	const [email, setEmail] = useState('');
+export default function HelpFeedbackScreen({ navigation }) {
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
 
-	const handleBackPress = () => {
-		router.back();
-	};
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
 
-	const handleSubmitFeedback = () => {
-		if (!subject || !message || !email) {
-			Alert.alert('Error', 'Please fill in all fields');
-			return;
-		}
+  const handleSubmitFeedback = () => {
+    if (!subject || !message || !email) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
 
-		// Simulate feedback submission
-		Alert.alert('Success', 'Your feedback has been submitted successfully! We will get back to you soon.', [
-			{ text: 'OK', onPress: () => router.back() }
-		]);
-	};
+    Alert.alert(
+      'Success',
+      'Your feedback has been submitted successfully! We will get back to you soon.',
+      [{ text: 'OK', onPress: () => navigation.goBack() }]
+    );
+  };
 
-	return (
-		<SafeAreaView className="flex-1 bg-white">
-			<ScrollView className="flex-1 bg-white">
-				{/* Header with back button and centered title - Added extra top padding for all screen sizes */}
-				<View className="flex-row items-center justify-between px-6 pt-12 pb-6 mb-8">
-					<TouchableOpacity
-						onPress={handleBackPress}
-						className="w-9 h-9 items-center justify-center">
-						<Image
-							source={{uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/nonon3su_expires_30_days.png"}}
-							resizeMode="stretch"
-							className="w-9 h-9"
-						/>
-					</TouchableOpacity>
-					<Text className="text-slate-700 text-2xl font-bold flex-1 text-center">
-						Help & Feedback
-					</Text>
-					<View className="w-9 h-9" />
-				</View>
-				{/* Content */}
-				<View className="mx-6">
-					{/* Quick Help Section */}
-					<View className="mb-8">
-						<Text className="text-slate-700 text-xl font-bold mb-4">
-							Quick Help
-						</Text>
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: 'white' }} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 48, paddingBottom: 24, marginBottom: 32 }}>
+          <TouchableOpacity onPress={handleBackPress} style={{ width: 36, height: 36, justifyContent: 'center', alignItems: 'center' }}>
+            <Image
+              source={require('../../../assets/images/icons/back.png')}
+              resizeMode="stretch"
+            />
+          </TouchableOpacity>
+          <Text style={{ flex: 1, textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: '#334155' }}>
+            Help & Feedback
+          </Text>
+          <View style={{ width: 36, height: 36 }} />
+        </View>
 
-						<View className="mb-4">
-							<TouchableOpacity
-								onPress={() => router.push('/(tabs)/help/faq')}
-								className="bg-gray-50 rounded-xl p-4 mb-3 border border-gray-200">
-								<View className="flex-row items-center justify-between">
-									<View className="flex-1">
-										<Text className="text-slate-700 text-base font-bold mb-2">
-											📋 Frequently Asked Questions
-										</Text>
-										<Text className="text-slate-600 text-sm leading-5">
-											Find answers to common questions about loans, applications, and payments.
-										</Text>
-									</View>
-									<Text className="text-blue-600 text-xl font-bold ml-3">
-										→
-									</Text>
-								</View>
-							</TouchableOpacity>
+        {/* Content */}
+        <View style={{ marginHorizontal: 24 }}>
+          {/* Quick Help Section */}
+          <View style={{ marginBottom: 32 }}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#334155', marginBottom: 16 }}>Quick Help</Text>
 
-							<TouchableOpacity
-								onPress={() => router.push('/(tabs)/help/how-to-use')}
-								className="bg-gray-50 rounded-xl p-4 mb-3 border border-gray-200">
-								<View className="flex-row items-center justify-between">
-									<View className="flex-1">
-										<Text className="text-slate-700 text-base font-bold mb-2">
-											📖 How To Use Guide
-										</Text>
-										<Text className="text-slate-600 text-sm leading-5">
-											Step-by-step guide to get started with our loan services.
-										</Text>
-									</View>
-									<Text className="text-blue-600 text-xl font-bold ml-3">
-										→
-									</Text>
-								</View>
-							</TouchableOpacity>
-						</View>
-					</View>
-					{/* Contact Section */}
-					<View className="mb-8">
-						<Text className="text-slate-700 text-xl font-bold mb-4">
-							Contact Support
-						</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('FAQScreen')}
+              style={{ backgroundColor: '#F8FAFC', borderRadius: 16, padding: 16, marginBottom: 12, borderWidth: 1, borderColor: '#E5E7EB' }}
+            >
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#334155', marginBottom: 4 }}>📋 Frequently Asked Questions</Text>
+                  <Text style={{ fontSize: 14, color: '#475569', lineHeight: 20 }}>
+                    Find answers to common questions about loans, applications, and payments.
+                  </Text>
+                </View>
+                <Text style={{ fontSize: 20, color: '#2563EB', marginLeft: 12 }}>→</Text>
+              </View>
+            </TouchableOpacity>
 
-						<View className="bg-blue-50 rounded-xl p-4 mb-4">
-							<Text className="text-blue-700 text-base font-bold mb-2">
-								📞 Phone Support
-							</Text>
-							<Text className="text-blue-600 text-sm mb-1">
-								+1 (555) 123-4567
-							</Text>
-							<Text className="text-blue-600 text-xs">
-								Monday - Friday: 9:00 AM - 6:00 PM
-							</Text>
-						</View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('HowToUseScreen')}
+              style={{ backgroundColor: '#F8FAFC', borderRadius: 16, padding: 16, marginBottom: 12, borderWidth: 1, borderColor: '#E5E7EB' }}
+            >
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#334155', marginBottom: 4 }}>📖 How To Use Guide</Text>
+                  <Text style={{ fontSize: 14, color: '#475569', lineHeight: 20 }}>
+                    Step-by-step guide to get started with our loan services.
+                  </Text>
+                </View>
+                <Text style={{ fontSize: 20, color: '#2563EB', marginLeft: 12 }}>→</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
 
-						<View className="bg-green-50 rounded-xl p-4 mb-4">
-							<Text className="text-green-700 text-base font-bold mb-2">
-								📧 Email Support
-							</Text>
-							<Text className="text-green-600 text-sm">
-								support@loanrisk.com
-							</Text>
-						</View>
+          {/* Contact Section */}
+          <View style={{ marginBottom: 32 }}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#334155', marginBottom: 16 }}>Contact Support</Text>
 
-						<View className="bg-purple-50 rounded-xl p-4 mb-6">
-							<Text className="text-purple-700 text-base font-bold mb-2">
-								💬 Live Chat
-							</Text>
-							<Text className="text-purple-600 text-sm mb-3">
-								Get instant help from our support team
-							</Text>
-							<TouchableOpacity
-								onPress={() => router.push('/(tabs)/help/chat')}
-								className="bg-slate-700 rounded-xl py-2 px-4 self-start">
-								<Text className="text-white text-sm font-bold">
-									Start Chat
-								</Text>
-							</TouchableOpacity>
-						</View>
-					</View>
+            <View style={{ backgroundColor: '#DBEAFE', borderRadius: 16, padding: 16, marginBottom: 12 }}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1D4ED8', marginBottom: 4 }}>📞 Phone Support</Text>
+              <Text style={{ fontSize: 14, color: '#2563EB', marginBottom: 2 }}>+1 (555) 123-4567</Text>
+              <Text style={{ fontSize: 12, color: '#2563EB' }}>Monday - Friday: 9:00 AM - 6:00 PM</Text>
+            </View>
 
-					{/* Feedback Form */}
-					<View className="mb-8">
-						<Text className="text-slate-700 text-xl font-bold mb-4">
-							Send Feedback
-						</Text>
+            <View style={{ backgroundColor: '#DCFCE7', borderRadius: 16, padding: 16, marginBottom: 12 }}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#15803D', marginBottom: 4 }}>📧 Email Support</Text>
+              <Text style={{ fontSize: 14, color: '#16A34A' }}>support@loanrisk.com</Text>
+            </View>
 
-						<View className="mb-4">
-							<Text className="text-slate-700 text-base font-bold mb-2">
-								Your Email
-							</Text>
-							<TextInput
-								value={email}
-								onChangeText={setEmail}
-								placeholder="Enter your email address"
-								keyboardType="email-address"
-								className="bg-white border border-gray-300 rounded-xl p-4 text-slate-700"
-							/>
-						</View>
+            <View style={{ backgroundColor: '#EDE9FE', borderRadius: 16, padding: 16, marginBottom: 24 }}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#7C3AED', marginBottom: 4 }}>💬 Live Chat</Text>
+              <Text style={{ fontSize: 14, color: '#6B21A8', marginBottom: 12 }}>Get instant help from our support team</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ChatScreen')}
+                style={{ backgroundColor: '#334155', borderRadius: 16, paddingVertical: 8, paddingHorizontal: 16, alignSelf: 'flex-start' }}
+              >
+                <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>Start Chat</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
-						<View className="mb-4">
-							<Text className="text-slate-700 text-base font-bold mb-2">
-								Subject
-							</Text>
-							<TextInput
-								value={subject}
-								onChangeText={setSubject}
-								placeholder="What is your feedback about?"
-								className="bg-white border border-gray-300 rounded-xl p-4 text-slate-700"
-							/>
-						</View>
+          {/* Feedback Form */}
+          <View style={{ marginBottom: 32 }}>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#334155', marginBottom: 16 }}>Send Feedback</Text>
 
-						<View className="mb-6">
-							<Text className="text-slate-700 text-base font-bold mb-2">
-								Message
-							</Text>
-							<TextInput
-								value={message}
-								onChangeText={setMessage}
-								placeholder="Tell us about your experience or suggestions..."
-								multiline
-								numberOfLines={4}
-								textAlignVertical="top"
-								className="bg-white border border-gray-300 rounded-xl p-4 text-slate-700 h-24"
-							/>
-						</View>
+            <View style={{ marginBottom: 16 }}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#334155', marginBottom: 4 }}>Your Email</Text>
+              <TextInput
+                value={email}
+                onChangeText={setEmail}
+                placeholder="Enter your email address"
+                keyboardType="email-address"
+                style={{ backgroundColor: 'white', borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 16, padding: 16, color: '#334155' }}
+              />
+            </View>
 
-						<TouchableOpacity
-							onPress={handleSubmitFeedback}
-							className="bg-slate-700 rounded-xl py-4 items-center">
-							<Text className="text-white text-lg font-bold">
-								Submit Feedback
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-			</ScrollView>
-		</SafeAreaView>
-	);
+            <View style={{ marginBottom: 16 }}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#334155', marginBottom: 4 }}>Subject</Text>
+              <TextInput
+                value={subject}
+                onChangeText={setSubject}
+                placeholder="What is your feedback about?"
+                style={{ backgroundColor: 'white', borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 16, padding: 16, color: '#334155' }}
+              />
+            </View>
+
+            <View style={{ marginBottom: 24 }}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#334155', marginBottom: 4 }}>Message</Text>
+              <TextInput
+                value={message}
+                onChangeText={setMessage}
+                placeholder="Tell us about your experience or suggestions..."
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+                style={{ backgroundColor: 'white', borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 16, padding: 16, color: '#334155', height: 120 }}
+              />
+            </View>
+
+            <TouchableOpacity
+              onPress={handleSubmitFeedback}
+              style={{ backgroundColor: '#1E3A8A', borderRadius: 16, paddingVertical: 16, alignItems: 'center' }}
+            >
+              <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Submit Feedback</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }

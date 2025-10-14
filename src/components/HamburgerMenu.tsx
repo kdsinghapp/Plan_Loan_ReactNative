@@ -50,7 +50,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                   style={{ width: 80, height: 80, borderRadius: 40, marginRight: 12 }}
                 />
                 <View style={{ flex: 1 }}>
-                  <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black', marginBottom: 4 }}>John Smith</Text>
+                  <Text style={{ fontSize: 18, fontWeight: '600', color: 'black', marginBottom: 4 }}>John Smith</Text>
                   <Text style={{ fontSize: 14, color: 'black' }}>johnsmith@example.com</Text>
                 </View>
                 <TouchableOpacity onPress={onClose}  >
@@ -61,29 +61,34 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
               {/* Menu Items */}
               <View style={{ marginLeft: 16 }}>
                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('Home')}>
-                  <Image source={require('../assets/images/menu/home.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
-                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>Home</Text>
-                                  {/* <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>首頁</Text> */}
+                  <Image source={require('../assets/images/menu/home.png')} style={{ width: 24, tintColor:"black" ,height: 24, marginRight: 12 }} />
+                  <Text style={{ fontSize: 16, fontWeight: '600', color: '#374151' }}>Home</Text>
+                                  {/* <Text style={{ fontSize: 16, fontWeight: '600', color: '#374151' }}>首頁</Text> */}
 
 				</TouchableOpacity>
 
-                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('Settings')}>
-                  <Image source={require('../assets/images/menu/settings.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
-				                    <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>Settings</Text>
 
-                  {/* <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>設定</Text> */}
+
+       <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('HelpFeedback')}>
+                  <Image source={require('../assets/images/menu/help.png')} style={{ width: 24, height: 24, marginRight: 12 ,tintColor:"black" }} />
+                  {/* <Text style={{ fontSize: 16, fontWeight: '600', color: '#374151' }}>幫助 & 回饋</Text> */}
+                                  <Text style={{ fontSize: 16, fontWeight: '600', color: '#374151' }}>Help & Feedback</Text>
+
+				</TouchableOpacity>
+
+
+                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('LegalPoliciesScreen')}>
+                  <Image source={require('../assets/images/menu/note.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
+				                    <Text style={{ fontSize: 16, fontWeight: '600', color: '#374151' }}>Terms & Conditions</Text>
+
+                  {/* <Text style={{ fontSize: 16, fontWeight: '600', color: '#374151' }}>設定</Text> */}
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('HelpFeedback')}>
-                  <Image source={require('../assets/images/menu/help.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
-                  {/* <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>幫助 & 回饋</Text> */}
-                                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>Help & Feedback</Text>
+          
 
-				</TouchableOpacity>
-
-                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('HowToUse')}>
-                  <Image source={require('../assets/images/menu/howtouse.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
-                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#374151' }}>How To Use</Text>
+                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12 }} onPress={() => handleNavigation('HowToUseScreen')}>
+                  <Image source={require('../assets/images/menu/howtouse.png')} style={{ width: 24, height: 24, marginRight: 12,tintColor:"black"  }} />
+                  <Text style={{ fontSize: 16, fontWeight: '600', color: '#374151' }}>How To Use</Text>
                 </TouchableOpacity>
               </View>
 
@@ -92,8 +97,8 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                 onPress={handleLogoutPress}
                 style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fee2e2', borderColor: '#f87171', borderWidth: 1, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 16, marginLeft: 16, marginTop: 24, width: '65%' }}
               >
-                <Image source={require('../assets/images/menu/logout.png')} style={{ width: 24, height: 24, marginRight: 12 }} />
-                <Text style={{ color: '#f87171', fontSize: 16, fontWeight: 'bold' }}>Logout</Text>
+                <Image source={require('../assets/images/menu/logout.png')} style={{ width: 24, height: 24, marginRight: 12,tintColor:"black"  }} />
+                <Text style={{ color: '#f87171', fontSize: 16, fontWeight: '600' }}>Logout</Text>
               </TouchableOpacity>
             </ScrollView>
           </View>
@@ -107,18 +112,18 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
       <Modal visible={showLogoutModal} transparent animationType="fade" onRequestClose={handleLogoutCancel}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(38,38,38,0.5)' }}>
           <View style={{ backgroundColor: 'white', borderRadius: 20, padding: 20, width: 300 }}>
-            <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#374151', textAlign: 'center', marginBottom: 8 }}>Logout?</Text>
+            <Text style={{ fontSize: 22, fontWeight: '600', color: '#374151', textAlign: 'center', marginBottom: 8 }}>Logout?</Text>
             <Text style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 20 }}>Are you sure you want to logout from this account?</Text>
 
             <TouchableOpacity onPress={handleLogoutConfirm}>
               <View style={{ backgroundColor: '#374151', paddingVertical: 12, borderRadius: 12, marginBottom: 12, alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>Yes</Text>
+                <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Yes</Text>
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleLogoutCancel}>
               <View style={{ backgroundColor: '#e5e7eb', paddingVertical: 12, borderRadius: 12, alignItems: 'center' }}>
-                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#374151' }}>No</Text>
+                <Text style={{ fontSize: 18, fontWeight: '600', color: '#374151' }}>No</Text>
               </View>
             </TouchableOpacity>
           </View>

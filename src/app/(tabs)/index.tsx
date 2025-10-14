@@ -144,7 +144,7 @@ export default function HomeScreen() {
             <View key={index} style={styles.historyItem}>
               <View style={styles.historyItemLeft}>
                 <Image
-              source={require('../../assets/images/home/history.png')}
+              source={require('../../assets/images/home/loan-approved.png')}
                   style={styles.historyItemIcon}
                 />
                 <View style={styles.historyItemText}>
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   loanAmount: { fontSize: 28, fontWeight: 'bold', color: '#FACC15', marginBottom: 8 },
   progressBg: { height: 8, borderRadius: 4, backgroundColor: '#D1D5DB', marginBottom: 8 },
   progressFill: { height: 8, borderRadius: 4, backgroundColor: '#FACC15' },
-  borrowMoreContainer: { flexDirection: 'row', justifyContent: 'flex-end' },
+  borrowMoreContainer: { flexDirection: 'row', justifyContent: 'flex-end' ,marginTop:11 },
   borrowMoreButton: { backgroundColor: '#FACC15', borderRadius: 8, paddingVertical: 6, paddingHorizontal: 16 },
   borrowMoreText: { color: '#1F2937', fontWeight: 'bold', fontSize: 14 },
 
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   repaidTextContainer: { flex: 1 },
   repaidTitle: { fontSize: 18, fontWeight: 'bold', color: '#1E293B', marginBottom: 2 },
   repaidSubtitle: { fontSize: 12, color: '#6B7280' },
-  repaidRight: { paddingVertical: 16, paddingHorizontal: 16, justifyContent: 'center', alignItems: 'center' },
+  repaidRight: { paddingVertical: 20, paddingHorizontal: 16, justifyContent: 'center', alignItems: 'center' },
   repaidPercentage: { fontSize: 16, fontWeight: 'bold', color: '#1E293B' },
 
   loanHistoryContainer: { marginHorizontal: 24, marginBottom: 24 },
@@ -215,6 +215,6 @@ const styles = StyleSheet.create({
   historyItemIcon: { width: 45, height: 45, marginRight: 10 },
   historyItemText: { flex: 1 },
   historyItemTitle: { fontSize: 14, fontWeight: 'bold', color: '#374061', marginBottom: 2 },
-  historyItemDesc: { fontSize: 12, color: '#F8B01D' },
+  historyItemDesc: { fontSize: 12, color: '#888888' },
   historyItemArrow: { width: 18, height: 18 },
 });
