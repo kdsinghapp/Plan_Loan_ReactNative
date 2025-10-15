@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { useNavigation, useRoute, NavigationProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import strings from "../../Languages";
 
 const Navbar = require('../../components/Navbar').default;
 const HamburgerMenu = require('../../components/HamburgerMenu').default;
@@ -41,7 +42,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
 
           {/* Title */}
-          <Text style={styles.headerTitle}>Home</Text>
+          <Text style={styles.headerTitle}>{strings.home}</Text>
 
           {/* Right Action Buttons */}
           <View style={styles.headerRight}>
@@ -92,9 +93,10 @@ export default function HomeScreen() {
           <View style={styles.borrowMoreContainer}>
             <TouchableOpacity
               style={styles.borrowMoreButton}
-              onPress={() => navigation.navigate('ApplyLoan')}
+              onPress={() => navigation.navigate('ApplyLoanScreen')}
+              // onPress={() => navigation.navigate('ApplyLoan')}
             >
-              <Text style={styles.borrowMoreText}>Want To Borrow More?</Text>
+              <Text style={styles.borrowMoreText}>{strings.home} Want To Borrow More?</Text>
               {/* <Text style={styles.borrowMoreText}>想要借更多嗎?</Text> */}
             </TouchableOpacity>
           </View>
@@ -108,9 +110,9 @@ export default function HomeScreen() {
               style={styles.repaidIcon}
             />
             <View style={styles.repaidTextContainer}>
-              <Text style={styles.repaidTitle}>Repaid Amount</Text>
+              <Text style={styles.repaidTitle}>{strings?.RepaidAmount}</Text>
               {/* <Text style={styles.repaidTitle}>已還款金額</Text> */}
-              <Text style={styles.repaidSubtitle}>Lorem Ipsum</Text>
+              <Text style={styles.repaidSubtitle}>{strings?.LoremIpsum}</Text>
             </View>
           </View>
           <ImageBackground
@@ -125,7 +127,7 @@ export default function HomeScreen() {
         {/* Loan History */}
         <View style={styles.loanHistoryContainer}>
           <View style={styles.loanHistoryHeader}>
-            <Text style={styles.loanHistoryTitle}>Loan History</Text>
+            <Text style={styles.loanHistoryTitle}>{strings?.LoanHistory}</Text>
             {/* <Text style={styles.loanHistoryTitle}>貸款歷史</Text> */}
             <Image
               source={require('../../assets/images/home/history.png')}
@@ -206,7 +208,7 @@ const styles = StyleSheet.create({
   repaidPercentage: { fontSize: 16, fontWeight: 'bold', color: '#1E293B' },
 
   loanHistoryContainer: { marginHorizontal: 24, marginBottom: 24 },
-  loanHistoryHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
+  loanHistoryHeader: {  flexDirection: 'row', alignItems: 'center', marginBottom: 18 },
   loanHistoryTitle: { flex: 1, fontSize: 24, fontWeight: 'bold', color: '#1E293B' },
   loanHistoryIcon: { width: 24, height: 24 },
 
@@ -214,7 +216,7 @@ const styles = StyleSheet.create({
   historyItemLeft: { flex: 1, flexDirection: 'row', alignItems: 'center', marginRight: 12 },
   historyItemIcon: { width: 45, height: 45, marginRight: 10 },
   historyItemText: { flex: 1 },
-  historyItemTitle: { fontSize: 14, fontWeight: 'bold', color: '#374061', marginBottom: 2 },
+  historyItemTitle: { fontSize: 14, fontWeight: '500', color: '#383D50', marginBottom: 2 },
   historyItemDesc: { fontSize: 12, color: '#888888' },
   historyItemArrow: { width: 18, height: 18 },
 });

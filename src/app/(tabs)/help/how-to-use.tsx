@@ -2,6 +2,7 @@ import React from 'react';
 import { Image,      ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import strings from '../../../Languages';
 
 export default function HowToUseScreen() {
   const navigation = useNavigation();
@@ -14,7 +15,7 @@ export default function HowToUseScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView  showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: 'white' }}>
         {/* Header */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 48, paddingBottom: 24, marginBottom: 32 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 24, marginBottom: 32 }}>
           <TouchableOpacity onPress={handleBackPress} style={{ width: 36, height: 36, alignItems: 'center', justifyContent: 'center' }}>
             <Image
   source={require('../../../assets/images/icons/back.png')}              resizeMode="stretch"
@@ -22,7 +23,7 @@ export default function HowToUseScreen() {
             />
           </TouchableOpacity>
           <Text style={{ color: '#374151', fontSize: 24, fontWeight: 'bold', flex: 1, textAlign: 'center' }}>
-            How To Use
+              {strings.howToUse}
           </Text>
           <View style={{ width: 36, height: 36 }} />
         </View>

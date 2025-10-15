@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -10,6 +10,7 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import strings, { loadLanguage } from "../../../Languages";
 
 const Navbar = require('../../../components/Navbar').default;
 const HamburgerMenu = require('../../../components/HamburgerMenu').default;
@@ -77,7 +78,7 @@ const payments2 = [
 
           {/* Center - Title */}
           <Text style={{ color: '#374061', fontSize: 24, fontWeight: 'bold' }}>
-            Loan
+             {strings?.loan}
           </Text>
 
           {/* Right side - Action buttons */}
@@ -136,7 +137,7 @@ const payments2 = [
 
             {/* Header */}
             <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', marginBottom: 16 }}>
-             Current Loan Amount
+                 {strings?.currentLoan}
             </Text>
 
             {/* Amount and Progress */}
@@ -178,14 +179,14 @@ const payments2 = [
                 style={{ backgroundColor: '#FACC15', borderRadius: 8, paddingHorizontal: 16, paddingVertical: 8 }}
                 onPress={() => navigation.navigate('RepayLoan')}
               >
-                <Text style={{ color: '#374061', fontWeight: 'bold', fontSize: 14 }}>Repay Loan</Text>
+                <Text style={{ color: '#374061', fontWeight: 'bold', fontSize: 14 }}>{strings?.repayLoan}</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
                   <Text style={{ color: 'black', fontWeight: 'bold' ,marginLeft:15,
 					fontSize:20
-				  }}>Loan Repayment</Text>
+				  }}>{strings.loanRepayment}</Text>
 			<View>
   {payments.map((item, index) => (
     <View
@@ -212,7 +213,7 @@ const payments2 = [
 <Text style={{ color: 'black', fontWeight: 'bold' ,marginLeft:15,
 					fontSize:20 ,
 					marginTop:15,
-				  }}>Loan Information</Text>
+				  }}>{strings.LoanInformation}</Text>
 			<View>
   {payments.map((item, index) => (
     <View

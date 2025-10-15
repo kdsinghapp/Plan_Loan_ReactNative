@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Image,   ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import strings from '../../../Languages';
 
 export default function HelpFeedbackScreen({ navigation }) {
   const [subject, setSubject] = useState('');
@@ -28,7 +29,7 @@ export default function HelpFeedbackScreen({ navigation }) {
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView style={{ flex: 1, backgroundColor: 'white' }} showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 48, paddingBottom: 24, marginBottom: 32 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingTop: 11, paddingBottom: 15, marginBottom: 32 }}>
           <TouchableOpacity onPress={handleBackPress} style={{ width: 36, height: 36, justifyContent: 'center', alignItems: 'center' }}>
             <Image
               source={require('../../../assets/images/icons/back.png')}
@@ -36,7 +37,8 @@ export default function HelpFeedbackScreen({ navigation }) {
             />
           </TouchableOpacity>
           <Text style={{ flex: 1, textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: '#334155' }}>
-            Help & Feedback
+                             {strings.HelpCenter}
+
           </Text>
           <View style={{ width: 36, height: 36 }} />
         </View>

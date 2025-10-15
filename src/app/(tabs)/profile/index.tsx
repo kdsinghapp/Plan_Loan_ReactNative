@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import strings from '../../../Languages';
  
 export default function ProfileScreen() {
   const navigation = useNavigation();
@@ -54,8 +55,8 @@ export default function ProfileScreen() {
           </TouchableOpacity>
 
           <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#334155' }}>
-            Profile
-          </Text>
+ {strings?.Profile}
+           </Text>
 
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity
@@ -107,7 +108,7 @@ export default function ProfileScreen() {
 
           {/* Social Media Cards */}
           <View style={{ width: '100%', marginBottom: 20 }}>
-            {['Facebook', 'Instagram', '上傳更多文案'].map((item, index) => (
+            {[strings.Facebook, 'Instagram', '上傳更多文案'].map((item, index) => (
               <View
                 key={index}
                 style={{
@@ -168,12 +169,12 @@ export default function ProfileScreen() {
             }}
           >
             {[
-              { label: 'Gender', value: 'Male' },
-              { label: 'DOB', value: '19-12-1990' },
-              { label: 'Age', value: '18 years old' },
-              { label: 'Phone Number', value: '+123 4567890' },
-              { label: 'Address', value: 'Lorem Ipsum Dolor Dorsi' },
-              { label: 'State', value: 'New York' },
+              { label: strings.Gender, value: 'Male' },
+              { label: strings.Dob, value: '19-12-1990' },
+              { label: strings.Age, value: '18 years old' },
+              { label: strings.PhoneNumber, value: '+123 4567890' },
+              { label: strings.Address, value: 'Lorem Ipsum Dolor Dorsi' },
+              { label:strings.State, value: 'New York' },
             ].map((item, index) => (
               <View key={index}>
                 <View
@@ -206,7 +207,7 @@ export default function ProfileScreen() {
             }}
           >
             <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
-              Edit Profile
+               {strings?.EditProfile}
             </Text>
           </TouchableOpacity>
         </View>

@@ -2,7 +2,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
  
-import HelpScreen from '.';
+import HelpScreen from './HelpScreen';
 import ChatScreen from './chat';
 import HelpFeedbackScreen from './feedback';
 import FAQScreen from './faq';

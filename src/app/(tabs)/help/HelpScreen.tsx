@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import Navbar from '../../../components/Navbar';
 import HamburgerMenu from '../../../components/HamburgerMenu';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import strings from '../../../Languages';
 
 export default function HelpScreen() {
   const navigation = useNavigation();
@@ -82,7 +83,7 @@ export default function HelpScreen() {
 		
 				  {/* Center - Title */}
 				  <Text style={{ color: '#374061', fontSize: 24, fontWeight: 'bold' }}>
-					Help
+					 {strings.Help}
 				  </Text>
 		
 				  {/* Right side - Action buttons */}
@@ -124,44 +125,44 @@ export default function HelpScreen() {
         {/* Help Options */}
         <View style={styles.optionsContainer}>
           <TouchableOpacity style={styles.optionButton} onPress={() => openURL('https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/qlwaq00b_expires_30_days.png')}>
-            <Text style={styles.optionText}>Help Center</Text>
+            <Text style={styles.optionText}>{strings.HelpCenter}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.optionButton} onPress={() => openURL('https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/y5npt4d5_expires_30_days.png')}>
-            <Text style={styles.optionText}>FAQ</Text>
+            <Text style={styles.optionText}>{strings?.FAQ}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.optionButton} onPress={() => openURL('https://storage.googleapis.com/tagjs-prod.appspot.com/v1/X3KVUEZWgu/jahr92jf_expires_30_days.png')}>
-            <Text style={styles.optionText}>Contact Support</Text>
+            <Text style={styles.optionText}>{strings?.ContactSupport}</Text>
           </TouchableOpacity>
         </View>
 
         {/* Request Support */}
         <View style={styles.supportContainer}>
-          <Text style={styles.sectionTitle}>Request Support</Text>
+          <Text style={styles.sectionTitle}>{strings?.RequestSupport}</Text>
 
-          <Text style={styles.label}>Subject</Text>
+          <Text style={styles.label}>{strings?.Subject}</Text>
           <TextInput
-            placeholder="Enter subject"
+            placeholder={strings?.Entersubject}
             value={subject}
             onChangeText={setSubject}
             style={[styles.input, { height: 60, textAlignVertical: 'top' }]}
             placeholderTextColor="#9CA3AF"
           />
 
-          <Text style={styles.label}>Message</Text>
+          <Text style={styles.label}>{strings?.Message}</Text>
           <TextInput
-            placeholder="Enter message"
+            placeholder={strings?.EnterMess}
             value={message}
             onChangeText={setMessage}
             multiline
             numberOfLines={4}
             style={[styles.input, { height: 100, textAlignVertical: 'top' }]}
             placeholderTextColor="#9CA3AF"
-          />
+          />  
 
           <TouchableOpacity style={styles.submitButton} onPress={() => alert('Support request submitted!')}>
-            <Text style={styles.submitButtonText}>Continue</Text>
+            <Text style={styles.submitButtonText}>{strings?.Continue}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

@@ -17,6 +17,7 @@ import {
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import strings from '../../Languages';
 
 // For development only - OTP storage
 export const otpStore = new Map();
@@ -176,7 +177,7 @@ const LoginScreen: React.FC<Props> = () => {
                 電子郵件
               </Text>
          <CustomInput
-              placeholder={'Enter your email'}
+              placeholder={strings?.EnteryourEmail}
                value={email}
         onChangeText={setEmail}
               
@@ -185,7 +186,7 @@ const LoginScreen: React.FC<Props> = () => {
                 密碼
               </Text>
                 <CustomInput
-              placeholder={'Password'}
+              placeholder={strings?.Password}
               secureTextEntryToggle
                  value={password}
                 onChangeText={setPassword}
@@ -212,7 +213,7 @@ const LoginScreen: React.FC<Props> = () => {
               >
                 登入
               </Button> */}
-<CustomButton title={"Log In"}    onPress={handleLogin}/>
+<CustomButton title={strings?.LogIn}    onPress={handleLogin}/>
               {/* Divider */}
               <View style={{  flexDirection: 'row', alignItems: 'center', marginVertical: 24 }}>
                 <View style={{ flex: 1, height: 1, backgroundColor: '#E5E7EB' }} />
@@ -244,7 +245,7 @@ const LoginScreen: React.FC<Props> = () => {
                     style={{ width: 24, height: 24, marginRight: 12 }}
                     resizeMode="contain"
                   />
-                  <Text style={{ color: '#4B5563', fontSize: 14, fontWeight: '500' }}>Google</Text>
+                  <Text style={{ color: '#4B5563', fontSize: 14, fontWeight: '500' }}>谷歌</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
@@ -266,7 +267,7 @@ const LoginScreen: React.FC<Props> = () => {
                     style={{ width: 24, height: 24, marginRight: 12 }}
                     resizeMode="contain"
                   />
-                  <Text style={{ color: '#4B5563', fontSize: 14, fontWeight: '500' }}>Apple</Text>
+                  <Text style={{ color: '#4B5563', fontSize: 14, fontWeight: '500' }}>苹果</Text>
                 </TouchableOpacity>
               </View>
 

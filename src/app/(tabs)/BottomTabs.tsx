@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '.';
+import HomeScreen from './HomeScreen';
 import ExploreScreen from './explore';
 import NotificationsScreen from './notifications';
-import LoanScreen from './loan';
-import HelpScreen from './help';
+import LoanScreen from './loan/LoanScreen';
+import HelpScreen from './help/HelpScreen';
 import ProfileScreen from './profile';
+import strings from '../../Languages';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,16 +57,16 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
   );
 };
 
-export default function AppNavigator() {
+export default function BottomTabs() {
   return (
     <Tab.Navigator
       screenOptions={{ headerShown: false }}
       tabBar={(props) => <CustomTabBar {...props} />}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Home' }} />
-      <Tab.Screen name="Loan" component={LoanScreen} options={{ tabBarLabel: 'Loan' }} />
-      <Tab.Screen name="Help" component={HelpScreen} options={{ tabBarLabel: 'Need Help' }} />
-      <Tab.Screen name="Notifications" component={ProfileScreen} options={{ tabBarLabel: 'Prfolfe' }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: strings.home}} />
+      <Tab.Screen name="Loan" component={LoanScreen} options={{ tabBarLabel: strings.loan }} />
+      <Tab.Screen name="Help" component={HelpScreen} options={{ tabBarLabel: strings.Help }} />
+      <Tab.Screen name="Notifications" component={ProfileScreen} options={{ tabBarLabel: strings.Profile}} />
       {/* <Tab.Screen name="Notifications" component={NotificationsScreen} options={{ tabBarLabel: 'Prfolfe' }} /> */}
       {/* <Tab.Screen name="Explore" component={ExploreScreen} options={{ tabBarLabel: '' }} /> */}
     </Tab.Navigator>
