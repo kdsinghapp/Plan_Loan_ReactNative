@@ -267,7 +267,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
+ 
   Modal,
   FlatList,
   Image,
@@ -275,6 +275,8 @@ import {
 import Slider from "@react-native-community/slider"; // ✅ custom slider
 import { useNavigation } from "@react-navigation/native";
 import strings from "../../../Languages";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 
 export default function ApplyLoan() {
   const [loanAmount, setLoanAmount] = useState("");
@@ -287,6 +289,8 @@ const navagtion = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */} 
+            <StatusBar barStyle="dark-content" />
+      
       <View style={{
         marginHorizontal:15
       }}>
@@ -395,7 +399,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 20,
   },
   header: {
     flexDirection: "row",
@@ -423,7 +426,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     fontSize: 15,
     marginBottom: 10, 
-    height:55
+    height:55 ,
+    marginTop:8
   },
   sliderContainer: {
     alignItems: "center",

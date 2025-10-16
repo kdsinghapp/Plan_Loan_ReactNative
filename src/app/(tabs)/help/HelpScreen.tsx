@@ -261,7 +261,9 @@ const styles = StyleSheet.create({
     borderRadius: 12, 
     paddingVertical: 12, 
     alignItems: 'center', 
-    marginTop: 24 
+    marginTop: 24 ,
+    height:55 ,
+    justifyContent:"center"
   },
   submitButtonText: {
     color: 'white',

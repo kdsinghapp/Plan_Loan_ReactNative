@@ -16,7 +16,7 @@ import OtpScreen from './OTPScreen/OtpScreen';
 import CreatePassword from './CreateNewPassword/CreateNewPassword';
 import TabLayout from '../(tabs)/BottomTabs';
 import NotificationsScreen from '../(tabs)/notifications';
-import EditProfileScreen from '../(tabs)/profile/edit';
+import EditProfileScreen from '../(tabs)/profile/EditProfileScreen';
 import HowToUseScreen from '../(tabs)/help/how-to-use';
 import HelpFeedbackScreen from '../(tabs)/help/feedback';
 import LegalPoliciesScreen from '../LegalPoliciesScreen';
@@ -25,6 +25,8 @@ import ApplyLoanScreen from '../ApplyLoanScreen';
 import ApplyLoan from '../(tabs)/loan/ApplyLoan';
 import { loadLanguage } from '../../Languages';
 import { ActivityIndicator, View } from 'react-native';
+import PrivacyPolicyScreen from '../(tabs)/settings/PrivacyPolicyScreen';
+import RepayLoanScreen from '../(tabs)/loan/RepayLoanScreen';
  
 
 const Stack = createStackNavigator();
@@ -32,21 +34,21 @@ const Stack = createStackNavigator();
 export default function AuthStack() {
   const [isReady, setIsReady] = useState(false);
 
-  useEffect(() => {
-    const initLang = async () => {
-      await loadLanguage();
-      setIsReady(true);
-    };
-    initLang();
-  }, []);
+  // useEffect(() => {
+  //   const initLang = async () => {
+  //     await loadLanguage();
+  //     setIsReady(true);
+  //   };
+  //   initLang();
+  // }, []);
 
-  if (!isReady) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="black" />
-      </View>
-    );
-  }
+  // if (!isReady) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  //       <ActivityIndicator size="large" color="black" />
+  //     </View>
+  //   );
+  // }
 
   return (
     <NavigationContainer>
@@ -63,6 +65,8 @@ export default function AuthStack() {
     <Stack.Screen name="HelpFeedback" component={HelpFeedbackScreen} />
     <Stack.Screen name="LegalPoliciesScreen" component={LegalPoliciesScreen} />
     <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
+    <Stack.Screen name="PrivacyPolicyScreen" component={PrivacyPolicyScreen} />
+    <Stack.Screen name="RepayLoan" component={RepayLoanScreen} />
 
 
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Image, Modal, ScrollView, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import strings, { loadLanguage, changeAppLanguage } from '../Languages';
+import DeleteAccountModal from './DeleteAccountModal';
+import { Alert } from 'react-native';
 
 interface HamburgerMenuProps {
   visible: boolean;
@@ -13,6 +15,38 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const handleDelete = async ({ reason }) => {
+    // Example: show confirm native alert before doing network call (optional)
+    // You can call your API here. Example with fetch:
+    const confirmed = await new Promise(resolve => {
+      Alert.alert(
+        "Final confirm",
+        "This will permanently delete your account. Continue?",
+        [
+          { text: "No", onPress: () => resolve(false), style: "cancel" },
+          { text: "Yes", onPress: () => resolve(true) },
+        ],
+        { cancelable: false }
+      );
+    });
+    if (!confirmed) throw new Error("User cancelled final confirmation");
+
+    // simulate async API:
+    await new Promise(res => setTimeout(res, 1500));
+
+    // Call real API:
+    // await fetch('https://api.example.com/delete-account', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ...' },
+    //   body: JSON.stringify({ reason }),
+    // });
+
+    // after success:
+    Alert.alert("Deleted", "Your account has been deleted.");
+    // navigate or reset app state as needed
+    // navigation.replace("Auth");
+  };
 
   useEffect(() => {
     const initLang = async () => {
@@ -77,8 +111,8 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
             shadowOpacity: 0.25,
             shadowRadius: 10,
             elevation: 20,
-            borderTopRightRadius: 20,
-            borderBottomRightRadius: 20
+            borderTopRightRadius: 2,
+            borderBottomRightRadius: 2
           }}>
             <ScrollView 
               contentContainerStyle={{ 
@@ -94,13 +128,13 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                 alignItems: 'center', 
                 paddingHorizontal: 20, 
                 paddingVertical: 16,
-                marginBottom: 30,
+                marginBottom: 20,
                 borderBottomWidth: 1,
                 borderBottomColor: '#F0F0F0'
               }}>
                 <View style={{
-                  width: 70,
-                  height: 70,
+                  width: 45,
+                  height: 45,
                   borderRadius: 35,
                    justifyContent: 'center',
                   alignItems: 'center',
@@ -129,15 +163,15 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                 <TouchableOpacity 
                   onPress={onClose}
                   style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: 18,
+                    width: 50,
+                    height: 50,
+                    borderRadius: 50,
                     backgroundColor: '#F3F4F6',
                     justifyContent: 'center',
                     alignItems: 'center'
                   }}
                 >
-                  <Text style={{ fontSize: 20, color: '#374151', fontWeight: '300' }}>×</Text>
+                  <Text style={{ fontSize: 20, color: 'black', fontWeight: '600' }}>×</Text>
                 </TouchableOpacity>
               </View>
 
@@ -150,6 +184,9 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                   { key: 'HowToUseScreen', label: strings.howToUse, icon: '🎯' ,
                     
                    },
+                  { key: 'PrivacyPolicyScreen', label: strings.PrivacyPolicy, icon: '🎯' ,
+                    
+                   },
                     { key: 'ChangePasswordScreen', label: strings.ChangePasswordScreen, icon: '🎯' ,
                     
                    },
@@ -158,17 +195,21 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                   <TouchableOpacity 
                     key={item.key}
                     style={{ 
-                      flexDirection: 'row', 
-                      alignItems: 'center', 
-                      paddingVertical: 12,
-                      paddingHorizontal: 16,
-                       borderRadius: 12,
+                      flexDirection: 'row',
+  alignItems: 'center',
+  paddingVertical: 15,
+  paddingHorizontal: 12,
+   borderRadius: 12,
+  backgroundColor: "white",
+  borderBottomWidth:0.8,
+ 
+ 
                      }}
                     onPress={item.action || (() => handleNavigation(item.key))}
                   >
                      <Text style={{ 
                       fontSize: 16, 
-                      fontWeight:  '600', 
+                      fontWeight:  '500', 
                       color:   '#374151' 
                     }}>
                       {item.label}
@@ -176,26 +217,44 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                   </TouchableOpacity>
                 ))}
               </View>
-
+              
+<TouchableOpacity
+ onPress={() => setModalVisible(true)}                style={{ 
+                  flexDirection: 'row',
+  alignItems: 'center',
+    borderRadius: 12,
+  backgroundColor: "white",
+  // Android shadow
+   // iOS shadow
+ 
+     paddingVertical: 15,
+  paddingHorizontal: 16,
+               
+                }}
+              >
+                 <Text style={{ color: '#DC2626', fontSize: 17, fontWeight: '600' }}>{strings.DeleteAccount}</Text>
+              </TouchableOpacity> 
               {/* Logout Button */}
+            
+              {/* App Version */}
+            
+            </ScrollView>
               <TouchableOpacity
                 onPress={handleLogoutPress}
                 style={{ 
                   flexDirection: 'row', 
                   alignItems: 'center', 
                   borderRadius: 12, 
-                  paddingVertical: 16,
-                  paddingHorizontal: 15,
-                  marginHorizontal: 16,
-              
+                   marginHorizontal: 15,  
+                  marginBottom:20,
+                       paddingVertical: 15,
+  paddingHorizontal: 16,
+               
                 }}
               >
-                 <Text style={{ color: '#DC2626', fontSize: 16, fontWeight: '600' }}>{strings.logout}</Text>
+                 <Text style={{ color: '#DC2626', fontSize: 17, fontWeight: '600' }}>{strings.logout}</Text>
               </TouchableOpacity>
 
-              {/* App Version */}
-            
-            </ScrollView>
           </View>
 
           {/* Overlay */}
@@ -204,6 +263,14 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
             onPress={onClose}
             activeOpacity={1}
           />
+           <DeleteAccountModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleDelete}
+        requireReason={true}
+        title= {strings?.DeleteAccount}
+        message= {strings?.deleteText}
+      />
         </View>
       </Modal>
 
@@ -385,6 +452,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
           </View>
         </View>
       </Modal>
+      
     </>
   );
 };

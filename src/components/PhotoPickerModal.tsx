@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 24, fontWeight: 'bold', color: '#334155', textAlign: 'center', marginBottom: 8 }, // text-slate-700
   subtitle: { fontSize: 14, color: '#6B7280', textAlign: 'center' }, // text-gray-500
   actions: { },
-  cameraButton: { marginBottom: 16, backgroundColor: '#334155', alignItems: 'center', borderRadius: 12, paddingVertical: 12 },
+  cameraButton: { marginBottom: 16, backgroundColor: '#1E3A8A', alignItems: 'center', borderRadius: 12, paddingVertical: 12 },
   cameraText: { fontSize: 18, fontWeight: 'bold', color: '#fff' },
   galleryButton: { backgroundColor: '#F1F5F9', borderWidth: 1, borderColor: '#D1D5DB', alignItems: 'center', borderRadius: 12, paddingVertical: 12 },
   galleryText: { fontSize: 18, fontWeight: 'bold', color: '#334155' },

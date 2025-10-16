@@ -203,7 +203,9 @@ export default function ProfileScreen() {
               borderRadius: 12,
               paddingVertical: 12,
               alignItems: 'center',
-              marginHorizontal: 16,
+              marginHorizontal: 5,
+              height:50 ,
+              justifyContent:"center"
             }}
           >
             <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
