@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 24,
+    paddingHorizontal: 15,
     paddingVertical: 24,
     paddingTop: 30,
     marginBottom: 32,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    left: 24,
+    left: 15,
   },
   backIcon: {
     width: 36,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     color: '#334155',
   },
   formContainer: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 15,
   },
   inputGroup: {
     marginBottom: 24,

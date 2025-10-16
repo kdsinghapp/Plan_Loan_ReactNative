@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  Linking,
 } from "react-native";
 import { useNavigation, useRoute, NavigationProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,6 +22,20 @@ export default function HomeScreen() {
   const route = useRoute();
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
+  const handleCallPress = async (number) => {
+    const url = `tel:${number}`; // iOS/Android dono ke liye kaam karta hai
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (!supported) {
+        Alert.alert('Error', 'Phone dialer is not available on this device');
+        return;
+      }
+      await Linking.openURL(url);
+    } catch (err) {
+      console.error('Failed to open dialer', err);
+      Alert.alert('Error', 'Could not open phone dialer');
+    }
+  };
 
 
   return (
@@ -48,7 +63,7 @@ export default function HomeScreen() {
           <View style={styles.headerRight}>
             <TouchableOpacity
               style={[styles.iconButton, { marginRight: 12 }]}
-              onPress={() => alert('Pressed!')}
+             onPress={() => handleCallPress("904834")}
             >
               <Image
                 source={require('../../assets/images/icons/call.png')}

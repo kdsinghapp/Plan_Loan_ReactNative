@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Image, SafeAreaView, ScrollView, View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
+import { loadLanguage } from '../../Languages';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -16,6 +17,12 @@ const SplashScreen = () => {
 
     return () => clearTimeout(timer);
   }, [navigation]);
+    useEffect(() => {
+      const initLang = async () => {
+        await loadLanguage();
+       };
+      initLang();
+    }, []);
 
   return (
     <SafeAreaView style={styles.container}>

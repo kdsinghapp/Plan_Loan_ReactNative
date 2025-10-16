@@ -1,6 +1,8 @@
 import React from "react";
-import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image,   ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import strings from "../../Languages";
 
 export default function NotificationsScreen() {
   const navigation = useNavigation();
@@ -19,7 +21,7 @@ export default function NotificationsScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 24, paddingHorizontal: 24, marginBottom: 24 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 24, paddingHorizontal: 15, marginBottom: 24 }}>
           <TouchableOpacity onPress={handleBackPress}>
             <Image
               source={require('../../assets/images/icons/back.png')}
@@ -28,11 +30,11 @@ export default function NotificationsScreen() {
             />
           </TouchableOpacity>
           <Text style={{ color: "#374061", fontSize: 24, fontWeight: "bold" }}>
-            Notifications
+            {strings?.Notifications}
           </Text>
         </View>
 
-        <View style={{ marginHorizontal: 24, marginBottom: 48 }}>
+        <View style={{ marginHorizontal: 15, marginBottom: 48 }}>
           {notifications.map((item, index) => (
             <View
               key={index}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
+   Linking,
    ScrollView,
   Text,
   TouchableOpacity,
@@ -45,6 +46,22 @@ const payments2 = [
   { label: "Interest Rate", value: "8.5% p.a." },
    { label: "Monthly Payment", value: "NT $2,500" }
 ];
+  const handleCallPress = async (number) => {
+    const url = `tel:${number}`; // iOS/Android dono ke liye kaam karta hai
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (!supported) {
+        Alert.alert('Error', 'Phone dialer is not available on this device');
+        return;
+      }
+      await Linking.openURL(url);
+    } catch (err) {
+      console.error('Failed to open dialer', err);
+      Alert.alert('Error', 'Could not open phone dialer');
+    }
+  };
+
+
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -91,7 +108,8 @@ const payments2 = [
                 padding: 8,
                 marginRight: 16
               }}
-              onPress={() => alert('Pressed!')}
+                       onPress={() => handleCallPress("904834")}
+
             >
               <Image
                 source={require('../../../assets/images/icons/call.png')}

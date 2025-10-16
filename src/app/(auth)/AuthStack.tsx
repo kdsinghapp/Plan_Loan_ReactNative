@@ -27,6 +27,7 @@ import { loadLanguage } from '../../Languages';
 import { ActivityIndicator, View } from 'react-native';
 import PrivacyPolicyScreen from '../(tabs)/settings/PrivacyPolicyScreen';
 import RepayLoanScreen from '../(tabs)/loan/RepayLoanScreen';
+import ChatScreen from '../(tabs)/help/chat';
  
 
 const Stack = createStackNavigator();
@@ -55,6 +56,7 @@ export default function AuthStack() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
        <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="ForgotPassword" component={PasswordReset} />  

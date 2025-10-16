@@ -5,6 +5,7 @@ import HTML from 'react-native-render-html';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import strings from '../Languages';
+import { StatusBar } from 'react-native';
  
 const LegalPoliciesScreen = () => {
     const [isLoading, setLoading] = useState(false);
@@ -18,8 +19,9 @@ const LegalPoliciesScreen = () => {
   };
     return (
         <SafeAreaView style={styles.container}>
+                   <StatusBar barStyle="dark-content" />
              
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingTop: 11, paddingBottom: 15, marginBottom: 32 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 15, paddingTop: 11, paddingBottom: 15, marginBottom: 32 }}>
                   <TouchableOpacity onPress={handleBackPress} style={{ width: 36, height: 36, justifyContent: 'center', alignItems: 'center' }}>
                     <Image
                       source={require('../assets/images/icons//back.png')}
@@ -35,13 +37,7 @@ const LegalPoliciesScreen = () => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.contentContainer}
             >
-                <View style={styles.illustrationWrapper}>
-                    {/* <Image
-                        source={imageIndex.aboutus}
-                        style={styles.illustration}
-                        resizeMode="contain"
-                    /> */}
-                </View>
+                
 
                 {content ? (
                     <HTML

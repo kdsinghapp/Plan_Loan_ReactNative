@@ -184,6 +184,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
                   { key: 'HowToUseScreen', label: strings.howToUse, icon: '🎯' ,
                     
                    },
+                  
                   { key: 'PrivacyPolicyScreen', label: strings.PrivacyPolicy, icon: '🎯' ,
                     
                    },
@@ -228,7 +229,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ visible, onClose }) => {
    // iOS shadow
  
      paddingVertical: 15,
-  paddingHorizontal: 16,
+  paddingHorizontal: 17,
                
                 }}
               >

@@ -41,7 +41,7 @@ export default function ProfileScreen() {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginHorizontal: 16,
+            marginHorizontal: 15,
             marginTop: 16,
             marginBottom: 20,
           }}

@@ -1,7 +1,10 @@
 // src/localization/Languages.ts
 import LocalizedStrings from 'react-native-localization';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let strings = new LocalizedStrings({
+
+type SupportedLang = 'en' | 'zh';
+
+const strings = new LocalizedStrings({
   en: {
     home: "Home",
     howToUse: "How To Use",
@@ -52,27 +55,23 @@ let strings = new LocalizedStrings({
     ChangePasswordScreen: "Change Password",
     EnteryourEmail: "Enter your email",
     Password: "Password",
-    LogIn: "Log In" ,
-    fullname:"Enter your full name" ,
-    FuName:"Full Name" ,
-    Enteryourpassword:"Enter your password" ,
-    DateBirth:"Date of Birth",
-Cancel:"Cancel"  ,
-    Done:"Done" ,
-    SaveChanges:"Save Changes",
-  PrivacyPolicy:"Privacy Policy" ,
-  DeleteAccount:"Delete Account",
-deleteText:"Are you sure you want to delete your account? You’ll lose all your data and access permanently.",
-  Delete:"Delete" ,
-Confirmdelete:"Confirm delete"
-  },
+    LogIn: "Log In",
+    fullname: "Enter your full name",
+    FuName: "Full Name",
+    Enteryourpassword: "Enter your password",
+    DateBirth: "Date of Birth",
+    Cancel: "Cancel",
+    Done: "Done",
+    SaveChanges: "Save Changes",
+    PrivacyPolicy: "Privacy Policy",
+    DeleteAccount: "Delete Account",
+    deleteText: "Are you sure you want to delete your account? You’ll lose all your data and access permanently.",
+    Delete: "Delete",
+    Confirmdelete: "Confirm delete" ,
+        Notifications:"Notifications"
 
+  },
   zh: {
-    EditProfile: "编辑个人资料",
-    State: "状态",
-    Address: "地址",
-    PhoneNumber: "电话号码",
-    Age: "年龄",
     home: "首頁",
     howToUse: "如何使用",
     terms: "條款與條件",
@@ -110,42 +109,47 @@ Confirmdelete:"Confirm delete"
     Facebook: "Facebook",
     Gender: "性别",
     Dob: "出生日期",
-    ApplyforLoa: "申请 Loa",
+    Age: "年龄",
+    PhoneNumber: "电话号码",
+    Address: "地址",
+    State: "状态",
+    EditProfile: "编辑个人资料",
+    ApplyforLoa: "申请贷款",
     EnterAmount: "输入金额",
     PreviewInterestRate: "预览利率",
     Confirm: "确认",
-    Password: "密码",
     ChangePasswordScreen: "更改密码",
     EnteryourEmail: "输入您的电子邮件",
-    LogIn: "登录" ,
-        fullname:"输入您的全名" ,
-FuName:"姓名" ,
-    Enteryourpassword:"输入您的密码" ,
-    DateBirth:"出生日期" ,
-    Cancel:"取消"  ,
-    Done:"完毕" ,
-        SaveChanges:"保存更改" ,
-          PrivacyPolicy:"隐私政策" ,
-
-DeleteAccount:"删除帐户",
-deleteText:"您确定要删除您的帐户吗？您将永久丢失所有数据和访问权限。",
-  Delete:"删除" ,
-  Confirmdelete:"确认删除"
-
-
+    Password: "密码",
+    LogIn: "登录",
+    fullname: "输入您的全名",
+    FuName: "姓名",
+    Enteryourpassword: "输入您的密码",
+    DateBirth: "出生日期",
+    Cancel: "取消",
+    Done: "完毕",
+    SaveChanges: "保存更改",
+    PrivacyPolicy: "隐私政策",
+    DeleteAccount: "删除帐户",
+    deleteText: "您确定要删除您的帐户吗？您将永久丢失所有数据和访问权限。",
+    Delete: "删除",
+    Confirmdelete: "确认删除" ,
+    Notifications:"通知"
   }
 });
 
-// Load saved language
+// Load saved language or set default 'zh'
 export const loadLanguage = async () => {
   const savedLang = await AsyncStorage.getItem('appLanguage');
-  if (savedLang) {
+  if (savedLang && (savedLang === 'en' || savedLang === 'zh')) {
     strings.setLanguage(savedLang);
+  } else {
+    strings.setLanguage('zh'); // set Chinese as default
   }
 };
 
 // Change language
-export const changeAppLanguage = async (lang: 'en' | 'zh') => {
+export const changeAppLanguage = async (lang: SupportedLang) => {
   strings.setLanguage(lang);
   await AsyncStorage.setItem('appLanguage', lang);
 };

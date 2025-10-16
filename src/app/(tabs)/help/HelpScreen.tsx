@@ -47,6 +47,20 @@ export default function HelpScreen() {
       Alert.alert("Error", "Something went wrong!");
     }
   };
+ const handleCallPress = async (number) => {
+    const url = `tel:${number}`; // iOS/Android dono ke liye kaam karta hai
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (!supported) {
+        Alert.alert('Error', 'Phone dialer is not available on this device');
+        return;
+      }
+      await Linking.openURL(url);
+    } catch (err) {
+      console.error('Failed to open dialer', err);
+      Alert.alert('Error', 'Could not open phone dialer');
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -96,7 +110,8 @@ export default function HelpScreen() {
 						padding: 8,
 						marginRight: 16
 					  }}
-					  onPress={() => alert('Pressed!')}
+					                         onPress={() => handleCallPress("904834")}
+
 					>
 					  <Image
 						source={require('../../../assets/images/icons/call.png')}

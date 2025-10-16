@@ -118,7 +118,7 @@ export default function HelpFeedbackScreen({ navigation }) {
                 onChangeText={setEmail}
                 placeholder="Enter your email address"
                 keyboardType="email-address"
-                style={{ backgroundColor: 'white', borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 16, padding: 16, color: '#334155' }}
+                style={{ height:55, backgroundColor: 'white', borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 16, padding: 16, color: '#334155' }}
               />
             </View>
 
@@ -147,7 +147,7 @@ export default function HelpFeedbackScreen({ navigation }) {
 
             <TouchableOpacity
               onPress={handleSubmitFeedback}
-              style={{ backgroundColor: '#1E3A8A', borderRadius: 16, paddingVertical: 16, alignItems: 'center' }}
+              style={{ height:55,justifyContent:"center", backgroundColor: '#1E3A8A', borderRadius: 16, paddingVertical: 16, alignItems: 'center' }}
             >
               <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Submit Feedback</Text>
             </TouchableOpacity>
