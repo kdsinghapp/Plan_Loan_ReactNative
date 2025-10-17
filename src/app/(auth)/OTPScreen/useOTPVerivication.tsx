@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
+import strings from '../../../Languages';
  
 
 export const useOtpVerification = (cellCount: number = 4) => {
@@ -17,12 +18,12 @@ export const useOtpVerification = (cellCount: number = 4) => {
 
   const handleChangeText = (text: string) => {
     setValue(text);
-    setErrorMessage(text.length < cellCount ? 'Veuillez saisir un code à 4 chiffres.' : '');
+    setErrorMessage(text.length < cellCount ? strings?.enterCode : '');
   };
 
   const handleVerifyOTP = async () => {
     if (value.length !== cellCount) {
-      setErrorMessage('Veuillez saisir un code à 4 chiffres.');
+      setErrorMessage(strings?.enterCode);
       return;
     }
 

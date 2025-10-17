@@ -68,8 +68,11 @@ const strings = new LocalizedStrings({
     deleteText: "Are you sure you want to delete your account? You’ll lose all your data and access permanently.",
     Delete: "Delete",
     Confirmdelete: "Confirm delete" ,
-        Notifications:"Notifications"
-
+        Notifications:"Notifications" ,
+        gmailError:"Please enter your email",
+passwordError:"Please enter your password",
+enterCode: "Please enter a 4-digit code." ,
+checkGmail :"Check your gmail"
   },
   zh: {
     home: "首頁",
@@ -134,7 +137,14 @@ const strings = new LocalizedStrings({
     deleteText: "您确定要删除您的帐户吗？您将永久丢失所有数据和访问权限。",
     Delete: "删除",
     Confirmdelete: "确认删除" ,
-    Notifications:"通知"
+    Notifications:"通知" ,
+            gmailError:"请输入您的电子邮件" ,
+            passwordError:"请输入您的密码",
+enterCode:"请输入 4 位数代码" ,
+checkGmail :"检查你的 Gmail",
+pleasePut:"Please put the 4 digits sent to you"
+
+
   }
 });
 

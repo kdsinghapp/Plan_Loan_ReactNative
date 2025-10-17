@@ -57,8 +57,8 @@ export default function PasswordReset() {
       </ScrollView>
 
       <CustomButton title={"Send"}
-        // onPress={passFunction}
-        onPress={() => navigation.navigate("OTP")}         
+        onPress={passFunction}
+        // onPress={() => navigation.navigate("OTP")}         
         style={{ marginBottom: 25 }} />
     </SafeAreaView>
   );

@@ -44,47 +44,52 @@ const LoginScreen: React.FC<Props> = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+const [emailError, setEmailError] = useState('');
+const [passwordError, setPasswordError] = useState('');
 
-  const handleLogin = async () => {
-          navigation.navigate('TabLayout', { identifier: email, isPhone: 'false' });
+const handleLogin = async () => {
+  // Reset errors
+  setEmailError('');
+  setPasswordError('');
 
-    // if (!email) {
-    //   Alert.alert('Error', 'Please enter your email');
-    //   return;
-    // }
+  if (!email) {
+    setEmailError(strings?.gmailError);
+    return;
+  }
 
-    // if (!password) {
-    //   Alert.alert('Error', 'Please enter your password');
-    //   return;
-    // }
+  if (!password) {
+    setPasswordError(strings?.passwordError);
+    return;
+  }
 
-    // try {
-    //   setLoading(true);
+  try {
+    setLoading(true);
 
-    //   if (email === 'test@example.com' && password === 'password') {
-    //     navigation.replace('Tabs');
-    //     setLoading(false);
-    //     return;
-    //   }
+    if (email === 'test@example.com' && password === 'password') {
+      navigation.replace('Tabs');
+      setLoading(false);
+      return;
+    }
 
-    //   const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
-    //   otpStore.set(email, {
-    //     otp,
-    //     createdAt: new Date(),
-    //     attempts: 0,
-    //   });
+    otpStore.set(email, {
+      otp,
+      createdAt: new Date(),
+      attempts: 0,
+    });
 
-    //   console.log(`OTP for ${email}: ${otp}`);
-    //   Alert.alert('Development Mode', `Your OTP is: ${otp}`);
+    // console.log(`OTP for ${email}: ${otp}`);
+    // Alert.alert('Development Mode', `Your OTP is: ${otp}`);
 
-    //   navigation.push('OTP', { identifier: email, isPhone: 'false' });
-    //   setLoading(false);
-    // } catch (error) {
-    //   Alert.alert('Login Failed', 'Failed to login. Please try again.');
-    //   setLoading(false);
-    // }
-  };
+    navigation.push('TabLayout');
+    setLoading(false);
+  } catch (error) {
+    setEmailError('Login Failed. Please try again.');
+    setLoading(false);
+  }
+};
+
 
   const handleGoogleSignIn = async () => {
     Alert.alert('Google Sign-In', 'Development placeholder', [
@@ -182,7 +187,9 @@ const LoginScreen: React.FC<Props> = () => {
         onChangeText={setEmail}
               
               />
-              <Text style={{ marginTop:11, fontSize: 16, fontWeight: '500', color: '#4B5563', marginBottom: 8 }}>
+              {emailError ? <Text style={{marginTop:10,marginBottom:10, color: 'red' }}>{emailError}</Text> : null}
+
+              <Text style={{  fontSize: 16, fontWeight: '500', color: '#4B5563', marginBottom: 8 }}>
                 密碼
               </Text>
                 <CustomInput
@@ -194,6 +201,8 @@ const LoginScreen: React.FC<Props> = () => {
              
            
               />
+              {passwordError ? <Text style={{ marginTop:10,marginBottom:10, color: 'red' }}>{passwordError}</Text> : null}
+
               
               <TouchableOpacity
                 style={{ alignSelf: 'flex-end', marginBottom: 20 }}

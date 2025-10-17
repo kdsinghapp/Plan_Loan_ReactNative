@@ -22,6 +22,7 @@ import {
 import { useOtpVerification } from './useOTPVerivication';
 import CustomHeader from '../../../components/CustomHeader';
 import CustomButton from '../../../components/CustomButton';
+import strings from '../../../Languages';
  
 
 export default function OtpScreen() {
@@ -51,7 +52,7 @@ export default function OtpScreen() {
             <CustomHeader   />
 
           <View style={styles.headerSection}>
-            <Text allowFontScaling={false} style={styles.txtHeading}>Check your mail </Text>
+            <Text allowFontScaling={false} style={styles.txtHeading}>{strings?.checkGmail} </Text>
             <Text  allowFontScaling={false} style={styles.txtDes}>Please put the 4 digits sent to you
             </Text>
           </View>
@@ -77,7 +78,7 @@ export default function OtpScreen() {
                 </View>
               )}
             />
-            {/* {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null} */}
+            {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
           </View>
           <Image  source ={(require("../../../assets/images/home/otp.png"))}  style={{ top:40, width: 300,height:300,  alignSelf: 'center', marginBottom: 30 }} />
 
@@ -85,15 +86,15 @@ export default function OtpScreen() {
 
         <CustomButton
           title={"Submit"}
-          onPress={() => {
+          // onPress={() => {
              
-            navigation.navigate("CreatePassword")
+          //   navigation.navigate("CreatePassword")
 
 
          
-          }
-          }
-          // onPress={handleVerifyOTP}
+          // }
+          // }
+          onPress={handleVerifyOTP}
           style={styles.submitButton}
         />
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import strings from '../../../Languages';
  
 
 export const usePasswordReset = () => {
@@ -24,12 +25,12 @@ export const usePasswordReset = () => {
     setEmail(value.trim());
 
     if (value.trim() === '') {
-      // setEmailError(localizationStrings.emailRequired);
+   setEmailError("localizationStrings.emailRequired");
       return;
     }
 
     if (!emailRegex.test(value.trim())) {
-      // setEmailError(localizationStrings.emailError);
+       setEmailError("ss");
     } else {
       setEmailError('');
     }
@@ -40,26 +41,22 @@ export const usePasswordReset = () => {
 
     try {
       if (email.trim() === '') {
-        // setEmailError(localizationStrings.emailRequired);
+      setEmailError(strings?.gmailError);
         return;
       }
 
       if (!emailRegex.test(email.trim())) {
-        // setEmailError(localizationStrings.emailError);
+     setEmailError(strings?.gmailError);
       } else {
         setEmailError('');
-
-
+ navigation.navigate("OTP")
         const params = {
           email: email,
           type:type,
           navigation,
         };
 
-        // console.log(params);
-        // await restEmailOtpScreen(params, setLoading);
-        //  navigation.navigate(ScreenNameEnum.OtpScreen)
-        // navigation.navigate(ScreenNameEnum.LoginScreen)
+        
       }
 
     } catch (error) {
