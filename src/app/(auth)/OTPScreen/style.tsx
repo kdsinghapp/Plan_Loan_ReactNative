@@ -62,8 +62,9 @@ export const styles = StyleSheet.create({
     backgroundColor: '#E9E9E9',
     borderRadius: 10, 
     justifyContent:"center" ,
-    alignItems:"center"
-  },
+    alignItems:"center" ,
+    
+   },
   cell: {
     width: 60,
     height: 60,
@@ -77,15 +78,15 @@ export const styles = StyleSheet.create({
     backgroundColor: '#E9E9E9',
     textAlignVertical: 'center',
      justifyContent:"center" ,
-    alignItems:"center"
+    alignItems:"center" ,
   },
   focusCell: {
     borderColor: "#2AB673",
     backgroundColor: 'white',
     textAlignVertical: 'center',
      justifyContent:"center" ,
-    alignItems:"center"
-  },
+    alignItems:"center" ,
+   },
   errorText: {
     color: 'red',
     marginTop: 18,

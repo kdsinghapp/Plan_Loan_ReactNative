@@ -9,6 +9,7 @@ import { usePasswordReset } from './usePasswordReset';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import CustomHeader from '../../../components/CustomHeader';
+import strings from '../../../Languages';
 export default function PasswordReset() {
   const {
     email,
@@ -30,15 +31,15 @@ export default function PasswordReset() {
         {/* <CustomBackHeader menuIcon={imageIndex.back} label={"Back"} /> */}
         <View style={styles.headerContainer}>
           <View style={styles.titleContainer}>
-            <Text allowFontScaling={false} style={styles.titleText}>Password Reset</Text>
-            <Text allowFontScaling={false} style={styles.descriptionText}>Please put your mobile number to reset your password</Text>
+            <Text allowFontScaling={false} style={styles.titleText}>{strings?.PasswordReset}</Text>
+            <Text allowFontScaling={false} style={styles.descriptionText}>{strings?.pleaseputgmail}</Text>
           </View>
         </View>
         <View style={{
-          marginTop: 28
+          marginTop: 14
         }}>
           <CustomInput
-            placeholder={"Email Address"}
+            placeholder={strings?.EnteryourEmail}
             // leftIcon={<Image source={imageIndex.Email}  style={{
             //   height:20,
             //   width:20,
@@ -56,7 +57,7 @@ export default function PasswordReset() {
 
       </ScrollView>
 
-      <CustomButton title={"Send"}
+      <CustomButton title={strings?.Send}
         onPress={passFunction}
         // onPress={() => navigation.navigate("OTP")}         
         style={{ marginBottom: 25 }} />

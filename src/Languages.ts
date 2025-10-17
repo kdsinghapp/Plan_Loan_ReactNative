@@ -72,7 +72,13 @@ const strings = new LocalizedStrings({
         gmailError:"Please enter your email",
 passwordError:"Please enter your password",
 enterCode: "Please enter a 4-digit code." ,
-checkGmail :"Check your gmail"
+checkGmail :"Check your gmail" ,
+pleasePut:"Please put the 4 digits sent to you",
+PasswordReset:"Password Reset" , 
+pleaseputgmail:"Please put your email to reset your password",
+Send:"Send",
+submit:"Submit"
+
   },
   zh: {
     home: "首頁",
@@ -142,8 +148,12 @@ checkGmail :"Check your gmail"
             passwordError:"请输入您的密码",
 enterCode:"请输入 4 位数代码" ,
 checkGmail :"检查你的 Gmail",
-pleasePut:"Please put the 4 digits sent to you"
-
+pleasePut:"请输入发送给您的 4 位数字",
+PasswordReset:"密码重置" ,
+pleaseputgmail:"请输入您的电子邮件以重置密码" ,
+Send:"发送" ,
+submit:"提交"
+ 
 
   }
 });

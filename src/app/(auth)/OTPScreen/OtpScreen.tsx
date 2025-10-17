@@ -53,7 +53,7 @@ export default function OtpScreen() {
 
           <View style={styles.headerSection}>
             <Text allowFontScaling={false} style={styles.txtHeading}>{strings?.checkGmail} </Text>
-            <Text  allowFontScaling={false} style={styles.txtDes}>Please put the 4 digits sent to you
+            <Text  allowFontScaling={false} style={styles.txtDes}>{strings?.pleasePut}
             </Text>
           </View>
 
@@ -85,7 +85,7 @@ export default function OtpScreen() {
         </ScrollView>
 
         <CustomButton
-          title={"Submit"}
+          title={strings?.submit}
           // onPress={() => {
              
           //   navigation.navigate("CreatePassword")

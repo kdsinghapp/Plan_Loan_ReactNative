@@ -25,12 +25,12 @@ export const usePasswordReset = () => {
     setEmail(value.trim());
 
     if (value.trim() === '') {
-   setEmailError("localizationStrings.emailRequired");
+     setEmailError(strings?.gmailError);
       return;
     }
 
     if (!emailRegex.test(value.trim())) {
-       setEmailError("ss");
+     setEmailError(strings?.gmailError);
     } else {
       setEmailError('');
     }
